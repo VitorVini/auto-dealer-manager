@@ -1,0 +1,41 @@
+# Diretórios de compilação
+bin/
+obj/
+Debug/
+Release/
+
+# Configurações do Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Arquivos de log
+*.log
+
+# Arquivos temporários
+~$*
+*.tmp
+
+# Arquivos de backup
+*.bak
+
+# Resharper
+_ReSharper*/
+*.ReSharper.*
+
+# Pacotes NuGet
+packages/
+*.nupkg
+
+# Test Results
+TestResults/
+
+# Arquivos de publicação
+*.Publish.xml
+
+# Outros arquivos que podem ser ignorados
+*.cache
+*.pdb
+*.dll.config
