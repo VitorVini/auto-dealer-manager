@@ -3,9 +3,68 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Presentation", "0 - Presentation", "{F7B88624-474A-4107-BAC1-50351A9563C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Services", "1 - Services", "{3041C613-1AF4-4B45-B5FF-44D8706D300F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Application", "2 - Application", "{8DE6CA23-A473-4C06-9CB6-582371543DE9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domain", "3 - Domain", "{F13E21EC-0DAD-451E-B22A-7BD867AD86FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{7EB26F66-32B7-4DB6-9455-211ED8B37054}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - CrossCutting", "4.1 - CrossCutting", "{61C47E43-95F4-4958-9E5A-B3366B1E0745}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.1 - Data", "4.1 - Data", "{7F47662D-70DE-4B41-AD07-20D62925EF92}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealerManager.MVC", "AutoDealerManager.MVC\AutoDealerManager.MVC.csproj", "{1237827B-BB20-4C6A-B890-5D8A439E7777}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealerManager.Application", "AutoDealerManager.Application\AutoDealerManager.Application.csproj", "{A467E5CD-D367-4F20-B728-0C2A2889BCAE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealerManager.Domain", "AutoDealerManager.Domain\AutoDealerManager.Domain.csproj", "{265A951D-587A-4218-866D-FFEE564FB9E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealerManager.Infra.Data", "AutoDealerManager.Infra.Data\AutoDealerManager.Infra.Data.csproj", "{238EA6CA-B4C9-46D7-8494-CCDDC56B0205}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoDealerManager.Infra.CrossCutting.Identity", "AutoDealerManager.Infra.CrossCutting.Identity\AutoDealerManager.Infra.CrossCutting.Identity.csproj", "{59C955D1-55C1-486E-92E4-52397D4C6BD2}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1237827B-BB20-4C6A-B890-5D8A439E7777}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1237827B-BB20-4C6A-B890-5D8A439E7777}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1237827B-BB20-4C6A-B890-5D8A439E7777}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1237827B-BB20-4C6A-B890-5D8A439E7777}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A467E5CD-D367-4F20-B728-0C2A2889BCAE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A467E5CD-D367-4F20-B728-0C2A2889BCAE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A467E5CD-D367-4F20-B728-0C2A2889BCAE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A467E5CD-D367-4F20-B728-0C2A2889BCAE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265A951D-587A-4218-866D-FFEE564FB9E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265A951D-587A-4218-866D-FFEE564FB9E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265A951D-587A-4218-866D-FFEE564FB9E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265A951D-587A-4218-866D-FFEE564FB9E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{238EA6CA-B4C9-46D7-8494-CCDDC56B0205}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{238EA6CA-B4C9-46D7-8494-CCDDC56B0205}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{238EA6CA-B4C9-46D7-8494-CCDDC56B0205}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{238EA6CA-B4C9-46D7-8494-CCDDC56B0205}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59C955D1-55C1-486E-92E4-52397D4C6BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59C955D1-55C1-486E-92E4-52397D4C6BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59C955D1-55C1-486E-92E4-52397D4C6BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59C955D1-55C1-486E-92E4-52397D4C6BD2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{61C47E43-95F4-4958-9E5A-B3366B1E0745} = {7EB26F66-32B7-4DB6-9455-211ED8B37054}
+		{7F47662D-70DE-4B41-AD07-20D62925EF92} = {7EB26F66-32B7-4DB6-9455-211ED8B37054}
+		{1237827B-BB20-4C6A-B890-5D8A439E7777} = {F7B88624-474A-4107-BAC1-50351A9563C9}
+		{A467E5CD-D367-4F20-B728-0C2A2889BCAE} = {8DE6CA23-A473-4C06-9CB6-582371543DE9}
+		{265A951D-587A-4218-866D-FFEE564FB9E8} = {F13E21EC-0DAD-451E-B22A-7BD867AD86FD}
+		{238EA6CA-B4C9-46D7-8494-CCDDC56B0205} = {7F47662D-70DE-4B41-AD07-20D62925EF92}
+		{59C955D1-55C1-486E-92E4-52397D4C6BD2} = {61C47E43-95F4-4958-9E5A-B3366B1E0745}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9168FFE2-3C52-450B-8D0B-193CDF496CA7}
