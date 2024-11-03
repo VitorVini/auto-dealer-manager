@@ -1,5 +1,6 @@
 ﻿using AutoDealerManager.Domain.Core;
 using System;
+using System.Collections.Generic;
 
 namespace AutoDealerManager.Domain.Entities
 {
@@ -10,5 +11,6 @@ namespace AutoDealerManager.Domain.Entities
         public string PaisOrigem { get; set; }
         public int AnoFundacao { get; set; }
         public string Website { get; set; }
+        public virtual ICollection<Veiculo> Veiculos { get; set; }
     }
 }

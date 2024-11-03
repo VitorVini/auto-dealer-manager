@@ -1,5 +1,6 @@
 ﻿using AutoDealerManager.Domain.Core;
 using System;
+using System.Collections.Generic;
 
 namespace AutoDealerManager.Domain.Entities
 {
@@ -10,6 +11,7 @@ namespace AutoDealerManager.Domain.Entities
         public Endereco Endereco { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
-        public int CapacidadeMaxVeiculos { get; set; }
+        public int CapacidadeMaximaVeiculos { get; set; }
+        public virtual ICollection<Venda> Vendas { get; set; }
     }
 }

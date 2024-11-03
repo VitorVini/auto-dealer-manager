@@ -36,14 +36,16 @@
     <Compile Include="Entities\Concessionaria.cs" />
     <Compile Include="Entities\Endereco.cs" />
     <Compile Include="Entities\Fabricante.cs" />
+    <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Veiculo.cs" />
     <Compile Include="Entities\Venda.cs" />
+    <Compile Include="Enum\EnumNivelAcesso.cs" />
     <Compile Include="Enum\EnumVeiculo.cs" />
+    <Compile Include="Interface\Repositories\IUsuarioRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
+    <Folder Include="Core\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

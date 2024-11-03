@@ -1,6 +1,7 @@
 ﻿using AutoDealerManager.Domain.Core;
 using AutoDealerManager.Domain.Enum;
 using System;
+using System.Collections.Generic;
 
 namespace AutoDealerManager.Domain.Entities
 {
@@ -13,7 +14,7 @@ namespace AutoDealerManager.Domain.Entities
         public Guid FabricanteId { get; set; }
         public EnumVeiculo TipoVeiculo { get; set; }
         public string Descricao { get; set; }
-
-        public virtual Fabricante Fabricante { get; set; }
+        public virtual ICollection<Venda> Vendas { get; set; }
+        public virtual ICollection<Fabricante> Fabricantes { get; set; }
     }
 }

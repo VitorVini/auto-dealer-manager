@@ -14,8 +14,8 @@ namespace AutoDealerManager.Domain.Entities
         public string Protocolo { get; set; }
 
         // EF Relations
-        public Veiculo Veiculo { get; set; }
-        public Concessionaria Concessionaria { get; set; }
-        public Cliente Cliente { get; set; }
+        public virtual Veiculo Veiculo { get; set; }
+        public virtual Concessionaria Concessionaria { get; set; }
+        public virtual Cliente Cliente { get; set; }
     }
 }

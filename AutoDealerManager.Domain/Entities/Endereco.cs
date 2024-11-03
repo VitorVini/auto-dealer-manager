@@ -10,8 +10,6 @@ namespace AutoDealerManager.Domain.Entities
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string CEP { get; set; }
-
-        // EF Relations
         public virtual Concessionaria Concessionaria { get; set; }
     }
 }
