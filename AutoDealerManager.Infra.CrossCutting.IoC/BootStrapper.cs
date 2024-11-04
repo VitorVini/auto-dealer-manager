@@ -1,4 +1,5 @@
-﻿using AutoDealerManager.Domain.Interface.Repository;
+﻿using AutoDealerManager.Domain.Interface.Repositories;
+using AutoDealerManager.Domain.Interface.Repository;
 using AutoDealerManager.Infra.CrossCutting.Identity.Config;
 using AutoDealerManager.Infra.CrossCutting.Identity.Context;
 using AutoDealerManager.Infra.CrossCutting.Identity.Models;
@@ -24,6 +25,11 @@ namespace AutoDealerManager.Infra.CrossCutting.IoC
             container.Register<ApplicationSignInManager>(Lifestyle.Scoped);
 
             container.Register<IUsuarioRepository, UsuarioRepository>(Lifestyle.Scoped);
+            container.Register<IConcessionariaRepository, ConcessionariaRepository>(Lifestyle.Scoped);
+            container.Register<IFabricanteRepository, FabricanteRepository>(Lifestyle.Scoped);
+            container.Register<IVeiculoRepository, VeiculoRepository>(Lifestyle.Scoped);
+            container.Register<IVendaRepository, VendaRepository>(Lifestyle.Scoped);
+
         }
     }
 }
