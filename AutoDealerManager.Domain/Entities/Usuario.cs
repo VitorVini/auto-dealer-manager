@@ -1,11 +1,11 @@
-﻿using AutoDealerManager.Domain.Enum;
+﻿using AutoDealerManager.Domain.Core;
+using AutoDealerManager.Domain.Enum;
 using System;
 
 namespace AutoDealerManager.Domain.Entities
 {
-    public class Usuario
+    public class Usuario : Entity
     {
-        public Guid Id { get; set; }
         public EnumNivelAcesso NivelAcesso { get; set; }
         public virtual string Email { get; set; }
         public virtual bool EmailConfirmed { get; set; }

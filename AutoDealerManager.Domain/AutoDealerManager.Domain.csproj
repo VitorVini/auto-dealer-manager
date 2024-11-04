@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Core\Entities\Entity.cs" />
+    <Compile Include="Core\Services\BaseService.cs" />
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Concessionaria.cs" />
     <Compile Include="Entities\Endereco.cs" />
@@ -41,11 +42,16 @@
     <Compile Include="Entities\Venda.cs" />
     <Compile Include="Enum\EnumNivelAcesso.cs" />
     <Compile Include="Enum\EnumVeiculo.cs" />
+    <Compile Include="Core\Interfaces\IRepository.cs" />
+    <Compile Include="Interface\Repositories\IConcessionariaRepository.cs" />
+    <Compile Include="Interface\Repositories\IFabricanteRepository.cs" />
     <Compile Include="Interface\Repositories\IUsuarioRepository.cs" />
+    <Compile Include="Interface\Repositories\IVeiculoRepository.cs" />
+    <Compile Include="Interface\Repositories\IVendaRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Core\Interfaces\" />
+    <Folder Include="Interface\Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

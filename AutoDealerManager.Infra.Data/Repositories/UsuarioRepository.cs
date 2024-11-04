@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace AutoDealerManager.Infra.Data.Repositories
 {
-    public class UsuarioRepository : IUsuarioRepository
+    public class UsuarioRepository : Repository<Usuario>, IUsuarioRepository
     {
         private readonly AutoDealerManagerContext _db;
 
@@ -16,7 +16,7 @@ namespace AutoDealerManager.Infra.Data.Repositories
             _db = new AutoDealerManagerContext();
         }
 
-        public Usuario ObterPorId(string id)
+        public Usuario ObterPorId(Guid id)
         {
             return _db.Usuarios.Find(id);
         }
@@ -25,7 +25,7 @@ namespace AutoDealerManager.Infra.Data.Repositories
         {
             return _db.Usuarios.ToList();
         }
-        public void DesativarLock(string id)
+        public void DesativarLock(Guid id)
         {
             _db.Usuarios.Find(id).LockoutEnabled = false;
             _db.SaveChanges();

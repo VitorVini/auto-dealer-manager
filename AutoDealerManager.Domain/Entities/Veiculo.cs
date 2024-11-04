@@ -7,7 +7,6 @@ namespace AutoDealerManager.Domain.Entities
 {
     public class Veiculo : Entity
     {
-        public Guid Id { get; set; }
         public string Modelo { get; set; }
         public int AnoFabricacao { get; set; }
         public decimal Preco { get; set; }

@@ -1,13 +1,11 @@
-﻿using AutoDealerManager.Domain.Entities;
+﻿using AutoDealerManager.Domain.Core.Interface;
+using AutoDealerManager.Domain.Entities;
 using System;
-using System.Collections.Generic;
 
 namespace AutoDealerManager.Domain.Interface.Repository
 {
-    public interface IUsuarioRepository : IDisposable
+    public interface IUsuarioRepository : IRepository<Usuario>
     {
-        Usuario ObterPorId(string id);
-        IEnumerable<Usuario> ObterTodos();
-        void DesativarLock(string id);
+        void DesativarLock(Guid id);
     }
 }

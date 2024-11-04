@@ -1,11 +1,10 @@
-﻿using System;
+﻿using AutoDealerManager.Domain.Core;
 using System.Collections.Generic;
 
 namespace AutoDealerManager.Domain.Entities
 {
-    public class Cliente
+    public class Cliente : Entity
     {
-        public Guid Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string Telefone { get; set; }

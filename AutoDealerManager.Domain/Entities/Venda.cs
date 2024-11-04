@@ -5,7 +5,6 @@ namespace AutoDealerManager.Domain.Entities
 {
     public class Venda : Entity
     {
-        public Guid Id { get; set; }
         public Guid VeiculoId { get; set; }
         public Guid ConcessionariaId { get; set; }
         public Guid ClienteId { get; set; }

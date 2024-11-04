@@ -1,10 +1,10 @@
-﻿using System;
+﻿using AutoDealerManager.Domain.Core;
+using System;
 
 namespace AutoDealerManager.Domain.Entities
 {
-    public class Endereco
+    public class Endereco : Entity
     {
-        public Guid Id { get; set; }
         public Guid ConcessionariaId { get; set; }
         public string Rua { get; set; }
         public string Cidade { get; set; }
