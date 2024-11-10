@@ -33,25 +33,63 @@
   <ItemGroup>
     <Compile Include="Core\Entities\Entity.cs" />
     <Compile Include="Core\Services\BaseService.cs" />
+    <Compile Include="Core\Validations\ValidacaoCPF.cs" />
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Concessionaria.cs" />
     <Compile Include="Entities\Endereco.cs" />
     <Compile Include="Entities\Fabricante.cs" />
+    <Compile Include="Entities\Services\ClienteService.cs" />
+    <Compile Include="Entities\Services\ConcessionariaService.cs" />
+    <Compile Include="Entities\Services\FabricanteService.cs" />
+    <Compile Include="Entities\Services\VeiculoService.cs" />
+    <Compile Include="Entities\Services\VendaService.cs" />
     <Compile Include="Entities\Usuario.cs" />
+    <Compile Include="Entities\Validations\ClienteValidation.cs" />
+    <Compile Include="Entities\Validations\ConcessionariaValidation.cs" />
+    <Compile Include="Entities\Validations\EnderecoValidation.cs" />
+    <Compile Include="Entities\Validations\FabricanteValidation.cs" />
+    <Compile Include="Entities\Validations\VeiculoValidation.cs" />
+    <Compile Include="Entities\Validations\VendaValidation.cs" />
     <Compile Include="Entities\Veiculo.cs" />
     <Compile Include="Entities\Venda.cs" />
     <Compile Include="Enum\EnumNivelAcesso.cs" />
     <Compile Include="Enum\EnumVeiculo.cs" />
     <Compile Include="Core\Interfaces\IRepository.cs" />
-    <Compile Include="Interface\Repositories\IConcessionariaRepository.cs" />
-    <Compile Include="Interface\Repositories\IFabricanteRepository.cs" />
-    <Compile Include="Interface\Repositories\IUsuarioRepository.cs" />
-    <Compile Include="Interface\Repositories\IVeiculoRepository.cs" />
-    <Compile Include="Interface\Repositories\IVendaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IClienteRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IConcessionariaRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IEnderecoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IFabricanteRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IUsuarioRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IVeiculoRepository.cs" />
+    <Compile Include="Interfaces\Repositories\IVendaRepository.cs" />
+    <Compile Include="Interfaces\Services\IClienteService.cs" />
+    <Compile Include="Interfaces\Services\IConcessionariaService.cs" />
+    <Compile Include="Interfaces\Services\IFabricanteService.cs" />
+    <Compile Include="Interfaces\Services\IVeiculoService.cs" />
+    <Compile Include="Interfaces\Services\IVendaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Interface\Services\" />
+    <ProjectReference Include="..\AutoDealerManager.CrossCutting.Helpers\AutoDealerManager.CrossCutting.Helpers.csproj">
+      <Project>{d6186979-b367-41d6-910c-419c4caa3d44}</Project>
+      <Name>AutoDealerManager.CrossCutting.Helpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation, Version=11.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.11.10.0\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

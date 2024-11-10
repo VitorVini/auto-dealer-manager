@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AutoDealerManager.Domain.Interface.Repositories
+namespace AutoDealerManager.Domain.Interfaces.Repositories
 {
     public interface IVendaRepository : IRepository<Venda>
     {

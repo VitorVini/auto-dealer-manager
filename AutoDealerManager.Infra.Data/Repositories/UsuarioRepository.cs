@@ -1,5 +1,5 @@
 ﻿using AutoDealerManager.Domain.Entities;
-using AutoDealerManager.Domain.Interface.Repository;
+using AutoDealerManager.Domain.Interfaces.Repository;
 using AutoDealerManager.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
@@ -10,8 +10,7 @@ namespace AutoDealerManager.Infra.Data.Repositories
     public class UsuarioRepository : Repository<Usuario>, IUsuarioRepository
     {
         private readonly AutoDealerManagerContext _db;
-
-        public UsuarioRepository()
+        public UsuarioRepository(AutoDealerManagerContext context) : base(context)
         {
             _db = new AutoDealerManagerContext();
         }

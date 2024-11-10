@@ -1,5 +1,6 @@
 ﻿using AutoDealerManager.Domain.Entities;
-using AutoDealerManager.Domain.Interface.Repositories;
+using AutoDealerManager.Domain.Interfaces.Repositories;
+using AutoDealerManager.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -10,6 +11,10 @@ namespace AutoDealerManager.Infra.Data.Repositories
 {
     public class VendaRepository : Repository<Venda>, IVendaRepository
     {
+        public VendaRepository(AutoDealerManagerContext context) : base(context)
+        {
+
+        }
         public async Task<IEnumerable<Venda>> ObterPorDataAsync(DateTime dataInicio, DateTime dataFim)
         {
             return await DbSet.AsNoTracking()

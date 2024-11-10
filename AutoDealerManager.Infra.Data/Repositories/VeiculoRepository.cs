@@ -1,6 +1,7 @@
 ﻿using AutoDealerManager.Domain.Entities;
 using AutoDealerManager.Domain.Enum;
-using AutoDealerManager.Domain.Interface.Repositories;
+using AutoDealerManager.Domain.Interfaces.Repositories;
+using AutoDealerManager.Infra.Data.Context;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,9 +12,13 @@ namespace AutoDealerManager.Infra.Data.Repositories
 {
     public class VeiculoRepository : Repository<Veiculo>, IVeiculoRepository
     {
-        public async Task<IEnumerable<Veiculo>> ObterPorModeloAsync(string modelo)
+        public VeiculoRepository(AutoDealerManagerContext context) : base(context)
         {
-            return await DbSet.AsNoTracking().Where(v => v.Modelo == modelo).ToListAsync();
+
+        }
+        public async Task<IEnumerable<Veiculo>> ObterPorModeloAsync(Guid fabricanteId, string modelo)
+        {
+            return await DbSet.AsNoTracking().Where(v => v.Modelo == modelo && v.FabricanteId == fabricanteId).ToListAsync();
         }
 
         public async Task<IEnumerable<Veiculo>> ObterPorFabricanteAsync(Guid fabricanteId)
@@ -25,5 +30,11 @@ namespace AutoDealerManager.Infra.Data.Repositories
         {
             return await DbSet.AsNoTracking().Where(v => v.TipoVeiculo == tipoVeiculo).ToListAsync();
         }
+
+        public async Task<bool> VeiculoExisteAsync(string modelo)
+        {
+            return await DbSet.AsNoTracking().AnyAsync(v => v.Modelo == modelo);
+        }
+
     }
 }

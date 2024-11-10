@@ -1,12 +1,15 @@
 ﻿using AutoDealerManager.Domain.Core.Interface;
 using AutoDealerManager.Domain.Entities;
+using System;
 using System.Threading.Tasks;
 
-namespace AutoDealerManager.Domain.Interface.Repositories
+namespace AutoDealerManager.Domain.Interfaces.Repositories
 {
     public interface IFabricanteRepository : IRepository<Fabricante>
     {
         Task<Fabricante> ObterPorNomeAsync(string nome);
         Task<bool> NomeExisteAsync(string nome);
+        Task<Fabricante> ObterFabricanteVeiculosAsync(Guid id);
+        Task<bool> FabricanteExisteAsync(Guid id);
     }
 }

@@ -28,6 +28,9 @@ namespace AutoDealerManager.Infra.Data.EntityConfig
                 .IsRequired()
                 .HasMaxLength(10);
 
+            Property(e => e.Numero)
+                .IsRequired();
+
             ToTable("Enderecos");
         }
     }

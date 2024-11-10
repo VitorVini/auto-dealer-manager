@@ -2,7 +2,7 @@
 using AutoDealerManager.Domain.Entities;
 using System;
 
-namespace AutoDealerManager.Domain.Interface.Repository
+namespace AutoDealerManager.Domain.Interfaces.Repository
 {
     public interface IUsuarioRepository : IRepository<Usuario>
     {

@@ -70,6 +70,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutoDealerManager.Application\AutoDealerManager.Application.csproj">
+      <Project>{a467e5cd-d367-4f20-b728-0c2a2889bcae}</Project>
+      <Name>AutoDealerManager.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AutoDealerManager.Domain\AutoDealerManager.Domain.csproj">
       <Project>{265a951d-587a-4218-866d-ffee564fb9e8}</Project>
       <Name>AutoDealerManager.Domain</Name>

@@ -13,18 +13,18 @@ namespace AutoDealerManager.Infra.Data.Repositories
     {
         protected readonly AutoDealerManagerContext Db;
         protected readonly DbSet<TEntity> DbSet;
-        protected Repository()
+        protected Repository(AutoDealerManagerContext db)
         {
-            Db = new AutoDealerManagerContext();
+            Db = db;
             DbSet = Db.Set<TEntity>();
         }
         public virtual async Task<TEntity> ObterPorId(Guid id)
         {
             return await DbSet.FindAsync(id);
         }
-        public virtual async Task<List<TEntity>> ObterTodos()
+        public virtual async Task<IEnumerable<TEntity>> ObterTodos()
         {
-            return await DbSet.ToListAsync();
+            return await DbSet.AsNoTracking().ToListAsync();
         }
         public async Task<IEnumerable<TEntity>> Buscar(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
@@ -49,6 +49,7 @@ namespace AutoDealerManager.Infra.Data.Repositories
         {
             return await Db.SaveChangesAsync();
         }
+
         public void Dispose()
         {
             Db?.Dispose();
