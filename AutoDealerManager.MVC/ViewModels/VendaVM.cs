@@ -14,13 +14,13 @@ namespace AutoDealerManager.MVC.ViewModels
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O veículo é obrigatório.")]
-        public int VeiculoID { get; set; }
+        public int VeiculoId { get; set; }
 
         [Required(ErrorMessage = "A concessionária é obrigatória.")]
-        public int ConcessionariaID { get; set; }
+        public int ConcessionariaId { get; set; }
 
         [Required(ErrorMessage = "O cliente é obrigatório.")]
-        public int ClienteID { get; set; }
+        public int ClienteId { get; set; }
 
         [Required(ErrorMessage = "A data da venda é obrigatória.")]
         [DataType(DataType.DateTime, ErrorMessage = "Data inválida.")]

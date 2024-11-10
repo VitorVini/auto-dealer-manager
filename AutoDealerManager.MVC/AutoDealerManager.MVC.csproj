@@ -125,6 +125,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ClienteVM.cs" />
+    <Compile Include="ViewModels\ConcessionariaVM.cs" />
+    <Compile Include="ViewModels\EnderecoVM.cs" />
+    <Compile Include="ViewModels\FabricanteVM.cs" />
+    <Compile Include="ViewModels\UsuarioVM.cs" />
+    <Compile Include="ViewModels\VeiculoVM.cs" />
+    <Compile Include="ViewModels\VendaVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -181,7 +188,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
@@ -214,6 +220,14 @@
     <ProjectReference Include="..\AutoDealerManager.Application\AutoDealerManager.Application.csproj">
       <Project>{a467e5cd-d367-4f20-b728-0c2a2889bcae}</Project>
       <Name>AutoDealerManager.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AutoDealerManager.Domain\AutoDealerManager.Domain.csproj">
+      <Project>{265a951d-587a-4218-866d-ffee564fb9e8}</Project>
+      <Name>AutoDealerManager.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AutoDealerManager.Infra.CrossCutting.IoC\AutoDealerManager.Infra.CrossCutting.IoC.csproj">
+      <Project>{ef9c8144-a53d-4698-a22a-1308e4b649fa}</Project>
+      <Name>AutoDealerManager.Infra.CrossCutting.IoC</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
