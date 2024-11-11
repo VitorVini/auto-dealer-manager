@@ -19,33 +19,34 @@ namespace AutoDealerManager.Domain.Entities.Services
         }
         public async Task Adicionar(Veiculo veiculo)
         {
-            if (!ExecutarValidacao(new VeiculoValidation(), veiculo)) return;
-
-            if (!AnoValidoUtils.ValidarAno(veiculo.AnoFabricacao)) return;
-
-            if (!await _fabricanteRepository.FabricanteExisteAsync(veiculo.FabricanteId)) return; // TO DO Notificações de erros em todos os services
-
-            if (await _veiculoRepository.VeiculoExisteAsync(veiculo.Modelo)) return;
-
-            await _veiculoRepository.Adicionar(veiculo);
+            await ValidarDadosVeiculoAsync(veiculo);
+            await _veiculoRepository.AdicionarAsync(veiculo);
         }
 
         public async Task Atualizar(Veiculo veiculo)
         {
-            if (!ExecutarValidacao(new VeiculoValidation(), veiculo)) return;
-
-            if (!AnoValidoUtils.ValidarAno(veiculo.AnoFabricacao)) return;
-
-            if (!await _fabricanteRepository.FabricanteExisteAsync(veiculo.FabricanteId)) return; // TO DO Notificações de erros em todos os services
-
-            if (await _veiculoRepository.VeiculoExisteAsync(veiculo.Modelo)) return;
-
-            await _veiculoRepository.Atualizar(veiculo);
+            await ValidarDadosVeiculoAsync(veiculo);
+            await _veiculoRepository.AtualizarAsync(veiculo);
         }
 
-        public async Task Remover(Guid id)
+        private async Task ValidarDadosVeiculoAsync(Veiculo veiculo)
         {
-            await _veiculoRepository.Remover(id);
+            if (!ExecutarValidacao(new VeiculoValidation(), veiculo))
+                throw new Exception("Erro de validação.");
+
+            if (!AnoValidoUtils.ValidarAno(veiculo.AnoFabricacao))
+                throw new Exception("Ano inválido.");
+
+            if (!await _fabricanteRepository.FabricanteExisteAsync(veiculo.FabricanteId))
+                throw new Exception("Fabricante não vinculado.");
+
+            if (await _veiculoRepository.VeiculoExisteAsync(veiculo.Modelo))
+                throw new Exception("Já existe um veículo cadastrado com esse nome.");
+        }
+
+        public async Task Remover(Veiculo veiculo)
+        {
+            await _veiculoRepository.RemoverAsync(veiculo);
         }
 
         public void Dispose()

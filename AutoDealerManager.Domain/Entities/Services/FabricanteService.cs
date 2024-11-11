@@ -18,42 +18,44 @@ namespace AutoDealerManager.Domain.Entities.Services
         {
             _fabricanteRepository = fabricanteRepository;
         }
+
         public async Task Adicionar(Fabricante fabricante)
         {
-            if (!ExecutarValidacao(new FabricanteValidation(), fabricante)) return;
-
-            if (await _fabricanteRepository.NomeExisteAsync(fabricante.Nome)) return;
-
-            if (!await WebsiteAcessivelAsync(fabricante.Website, new CancellationToken())) return;
-
-            if (!AnoValidoUtils.ValidarAno(fabricante.AnoFundacao)) return;
-
-            await _fabricanteRepository.Adicionar(fabricante);
+            await ValidarDadosFabricanteAsync(fabricante);
+            await _fabricanteRepository.AdicionarAsync(fabricante);
         }
 
         public async Task Atualizar(Fabricante fabricante)
         {
-            if (!ExecutarValidacao(new FabricanteValidation(), fabricante)) return;
-
-            if (await _fabricanteRepository.NomeExisteAsync(fabricante.Nome)) return;
-
-            if (!await WebsiteAcessivelAsync(fabricante.Website, new CancellationToken())) return;
-
-            if (!AnoValidoUtils.ValidarAno(fabricante.AnoFundacao)) return;
-
-            await _fabricanteRepository.Atualizar(fabricante);
+            await ValidarDadosFabricanteAsync(fabricante);
+            await _fabricanteRepository.AtualizarAsync(fabricante);
         }
 
-        public async Task Remover(Guid id)
+        private async Task ValidarDadosFabricanteAsync(Fabricante fabricante)
         {
-            var fabricante = await _fabricanteRepository.ObterFabricanteVeiculosAsync(id);
+            if (!ExecutarValidacao(new FabricanteValidation(), fabricante))
+                throw new Exception("Erro de validação.");
 
-            if (fabricante.Veiculos.Any())
+            if (await _fabricanteRepository.NomeExisteAsync(fabricante.Id, fabricante.Nome))
+                throw new Exception("Já existe um fabricante cadastrado com esse nome.");
+
+            if (!await WebsiteAcessivelAsync(fabricante.Website, new CancellationToken()))
+                throw new Exception("Website não está acessível, favor verificar.");
+
+            if (!AnoValidoUtils.ValidarAno(fabricante.AnoFundacao))
+                throw new Exception("Ano inválido.");
+        }
+
+        public async Task Remover(Fabricante fabricante)
+        {
+            var fabricanteVeiculos = await _fabricanteRepository.ObterFabricanteVeiculosAsync(fabricante.Id);
+
+            if (fabricanteVeiculos.Veiculos.Any())
             {
                 return; // TO DO 
             }
 
-            await _fabricanteRepository.Remover(id);
+            await _fabricanteRepository.RemoverAsync(fabricante);
         }
 
         public async Task<bool> WebsiteAcessivelAsync(string website, CancellationToken cancellationToken)

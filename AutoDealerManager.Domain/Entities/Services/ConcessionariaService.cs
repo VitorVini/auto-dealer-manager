@@ -28,7 +28,7 @@ namespace AutoDealerManager.Domain.Entities.Services
 
             if (await _concessionariaRepository.ConcessionariaExisteAsync(concessionaria.Nome)) return;
 
-            await _concessionariaRepository.Adicionar(concessionaria);
+            await _concessionariaRepository.AdicionarAsync(concessionaria);
         }
 
         public async Task Atualizar(Concessionaria concessionaria) // Não terei que atualizar nada no sistema
@@ -37,12 +37,12 @@ namespace AutoDealerManager.Domain.Entities.Services
 
             if (await _concessionariaRepository.ConcessionariaExisteAsync(concessionaria.Nome)) return;
 
-            await _concessionariaRepository.Atualizar(concessionaria);
+            await _concessionariaRepository.AtualizarAsync(concessionaria);
         }
 
-        public async Task Remover(Guid id)
+        public async Task Remover(Concessionaria concessionaria)
         {
-            await _concessionariaRepository.Remover(id);
+            await _concessionariaRepository.RemoverAsync(concessionaria);
         }
 
         public void Dispose()

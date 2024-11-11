@@ -9,6 +9,7 @@ namespace AutoDealerManager.MVC.ViewModels
         public FabricanteVM()
         {
             Id = Guid.NewGuid();
+            IsUpdate = false;
         }
 
         [Key]
@@ -31,5 +32,7 @@ namespace AutoDealerManager.MVC.ViewModels
         [Url(ErrorMessage = "O campo Website deve ser uma URL válida")]
         [StringLength(255, ErrorMessage = "O Website deve ter no máximo 255 caracteres")]
         public string Website { get; set; }
+
+        public bool IsUpdate { get; set; }
     }
 }

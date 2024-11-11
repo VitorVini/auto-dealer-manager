@@ -8,6 +8,6 @@ namespace AutoDealerManager.Domain.Interfaces.Services
     {
         Task Adicionar(Concessionaria concessionaria);
         Task Atualizar(Concessionaria concessionaria);
-        Task Remover(Guid id);
+        Task Remover(Concessionaria concessionaria);
     }
 }

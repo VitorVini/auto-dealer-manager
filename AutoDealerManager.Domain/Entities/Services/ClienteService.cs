@@ -25,7 +25,7 @@ namespace AutoDealerManager.Domain.Entities.Services
 
             if (await _clienteRepository.NomeExisteAsync(cliente.Nome)) return;
 
-            await _clienteRepository.Adicionar(cliente);
+            await _clienteRepository.AdicionarAsync(cliente);
         }
 
         public async Task Atualizar(Cliente cliente)
@@ -38,12 +38,12 @@ namespace AutoDealerManager.Domain.Entities.Services
 
             if (await _clienteRepository.NomeExisteAsync(cliente.Nome)) return;
 
-            await _clienteRepository.Atualizar(cliente);
+            await _clienteRepository.AtualizarAsync(cliente);
         }
 
-        public async Task Remover(Guid id)
+        public async Task Remover(Cliente cliente)
         {
-            await _clienteRepository.Remover(id);
+            await _clienteRepository.RemoverAsync(cliente);
         }
 
         public void Dispose()

@@ -32,7 +32,7 @@ namespace AutoDealerManager.MVC.ViewModels
         public decimal Preco { get; set; }
 
         [Required(ErrorMessage = "O fabricante é obrigatório.")]
-        public int FabricanteID { get; set; }
+        public int FabricanteId { get; set; }
 
         [DisplayName("Tipo de veículo")]
         [Required(ErrorMessage = "O tipo de veículo é obrigatório.")]
@@ -44,5 +44,6 @@ namespace AutoDealerManager.MVC.ViewModels
 
         // Lista para popular o dropdown de fabricantes na tela
         public IEnumerable<SelectListItem> Fabricantes { get; set; }
+        public bool IsUpdate { get; set; }
     }
 }

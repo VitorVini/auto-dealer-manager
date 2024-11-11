@@ -8,6 +8,6 @@ namespace AutoDealerManager.Domain.Interfaces.Services
     {
         Task Adicionar(Venda venda);
         Task Atualizar(Venda venda);
-        Task Remover(Guid id);
+        Task Remover(Venda venda);
     }
 }

@@ -30,41 +30,41 @@ namespace AutoDealerManager.Domain.Entities.Services
         {
             if (!ExecutarValidacao(new VendaValidation(), venda)) return;
 
-            var veiculo = await _veiculoRepository.ObterPorId(venda.VeiculoId);
+            var veiculo = await _veiculoRepository.ObterPorIdAsync(venda.VeiculoId);
             if (veiculo == null) return;
 
             if (venda.PrecoVenda > veiculo.Preco) return;
 
-            var cliente = await _clienteRepository.ObterPorId(venda.ClienteId);
+            var cliente = await _clienteRepository.ObterPorIdAsync(venda.ClienteId);
             if (cliente == null) return;
 
-            var concessionaria = await _concessionariaRepository.ObterPorId(venda.ConcessionariaId);
+            var concessionaria = await _concessionariaRepository.ObterPorIdAsync(venda.ConcessionariaId);
             if (concessionaria == null) return;
 
             venda.Protocolo = Guid.NewGuid().ToString();
 
-            await _vendaRepository.Adicionar(venda);
+            await _vendaRepository.AdicionarAsync(venda);
         }
 
         public async Task Atualizar(Venda venda)
         {
-            var veiculo = await _veiculoRepository.ObterPorId(venda.VeiculoId);
+            var veiculo = await _veiculoRepository.ObterPorIdAsync(venda.VeiculoId);
             if (veiculo == null) return;
 
             if (venda.PrecoVenda > veiculo.Preco) return;
 
-            var cliente = await _clienteRepository.ObterPorId(venda.ClienteId);
+            var cliente = await _clienteRepository.ObterPorIdAsync(venda.ClienteId);
             if (cliente == null) return;
 
-            var concessionaria = await _concessionariaRepository.ObterPorId(venda.ConcessionariaId);
+            var concessionaria = await _concessionariaRepository.ObterPorIdAsync(venda.ConcessionariaId);
             if (concessionaria == null) return;
 
-            await _vendaRepository.Atualizar(venda);
+            await _vendaRepository.AtualizarAsync(venda);
         }
 
-        public async Task Remover(Guid id)
+        public async Task Remover(Venda venda)
         {
-            await _vendaRepository.Remover(id);
+            await _vendaRepository.RemoverAsync(venda);
         }
 
         public void Dispose()

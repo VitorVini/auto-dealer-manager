@@ -1,0 +1,48 @@
+﻿@model AutoDealerManager.MVC.ViewModels.FabricanteVM
+@{
+    ViewBag.Title = "Adicionar Novo Fabricante";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("Create", "Fabricantes", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", maxlength = 100 })
+            @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PaisOrigem, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.PaisOrigem, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PaisOrigem, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.AnoFundacao, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.AnoFundacao, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(m => m.AnoFundacao, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Website, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Website, new { @class = "form-control", type = "url" })
+            @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                <input type="submit" value="Cadastrar" class="btn btn-primary" />
+                <a class="btn btn-info" href="@Url.Action("Index", "Home")">Voltar</a>
+            </div>
+        </div>
+        }
+    </div>
+}
+        @section Scripts {
+            @Scripts.Render("~/bundles/jqueryval")
+        }

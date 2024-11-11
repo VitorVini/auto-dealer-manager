@@ -25,12 +25,12 @@ namespace AutoDealerManager.Application.Services
 
         public async Task<IEnumerable<Concessionaria>> ObterConcessionariasAsync()
         {
-            return await _concessionariaRepository.ObterTodos();
+            return await _concessionariaRepository.ObterTodosAsync();
         }
 
         public async Task<IEnumerable<Fabricante>> ObterFabricantesAsync()
         {
-            return await _fabricanteRepository.ObterTodos();
+            return await _fabricanteRepository.ObterTodosAsync();
         }
 
         public async Task<IEnumerable<Veiculo>> ObterVeiculosPorFabricanteAsync(Guid fabricanteId)

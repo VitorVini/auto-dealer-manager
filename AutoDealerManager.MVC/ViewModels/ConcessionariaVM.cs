@@ -37,5 +37,6 @@ namespace AutoDealerManager.MVC.ViewModels
         [Range(1, int.MaxValue, ErrorMessage = "A capacidade deve ser um número positivo.")]
         [DisplayName("Capacidade máxima de veículos")]
         public int CapacidadeMaximaVeiculos { get; set; }
+        public bool IsUpdate { get; set; }
     }
 }

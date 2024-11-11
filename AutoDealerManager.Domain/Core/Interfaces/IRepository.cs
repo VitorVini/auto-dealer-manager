@@ -7,12 +7,12 @@ namespace AutoDealerManager.Domain.Core.Interface
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entity
     {
-        Task Adicionar(TEntity entity);
-        Task<TEntity> ObterPorId(Guid id);
-        Task<IEnumerable<TEntity>> ObterTodos();
-        Task Atualizar(TEntity entity);
-        Task Remover(Guid id);
-        Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate);
-        Task<int> SaveChanges();
+        Task AdicionarAsync(TEntity entity);
+        Task<TEntity> ObterPorIdAsync(Guid id);
+        Task<IEnumerable<TEntity>> ObterTodosAsync();
+        Task AtualizarAsync(TEntity entity);
+        Task RemoverAsync(TEntity entity);
+        Task<IEnumerable<TEntity>> BuscarAsync(Expression<Func<TEntity, bool>> predicate);
+        Task<int> SaveChangesAsync();
     }
 }

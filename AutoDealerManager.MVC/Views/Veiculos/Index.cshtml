@@ -1,0 +1,40 @@
+@model IEnumerable<AutoDealerManager.MVC.ViewModels.VeiculoVM>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Veiculos</h3>
+        <a href="@Url.Action("Create")" class="btn btn-primary">Novo</a>
+    </div>
+    <div class="card-body">
+        @if (@TempData["Sucesso"] != null) {
+            @Html.Partial("_Sucesso")
+        }
+        <table class="table table-striped">
+            <thead>
+                <th>Modelo</th>
+                <th>Ano de fabricacao</th>
+                <th>Preço</th>
+                <th>Fabricante</th>
+                <th>Tipo do veículo</th>
+                <th>Descrição</th>
+                <th></th>
+            </thead>
+            <tbody>
+                @foreach(var fabricante in Model) {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => fabricante.Modelo)</td>
+                        <td>@Html.DisplayFor(modelItem => fabricante.AnoFabricacao)</td>
+                        <td>@Html.DisplayFor(modelItem => fabricante.Preco)</td>
+                        <td>@Html.DisplayFor(modelItem => fabricante.FabricanteId)</td>
+                        <td>@Html.DisplayFor(modelItem => fabricante.TipoVeiculo)</td>
+                        <td>@Html.DisplayFor(modelItem => fabricante.Descricao)</td>
+                        <td>
+                            <a class="btn btn-warning" href="@Url.Action("Edit", "Veiculos", new { id = fabricante.Id })">Editar</a>
+                            <a class="btn btn-danger" href="@Url.Action("Delete", "Veiculos", new { id = fabricante.Id })">Excluir</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

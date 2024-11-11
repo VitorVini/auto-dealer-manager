@@ -15,9 +15,9 @@ namespace AutoDealerManager.Infra.Data.Repositories
             return await DbSet.AsNoTracking().FirstOrDefaultAsync(f => f.Nome == nome);
         }
 
-        public async Task<bool> NomeExisteAsync(string nome)
+        public async Task<bool> NomeExisteAsync(Guid id, string nome)
         {
-            return await DbSet.AnyAsync(f => f.Nome == nome);
+            return await DbSet.AnyAsync(f => f.Id != id && f.Nome == nome);
         }
 
         public async Task<Fabricante> ObterFabricanteVeiculosAsync(Guid id)

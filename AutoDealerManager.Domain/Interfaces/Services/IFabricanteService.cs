@@ -10,6 +10,7 @@ namespace AutoDealerManager.Domain.Interfaces.Services
         Task<bool> WebsiteAcessivelAsync(string website, CancellationToken cancellationToken);
         Task Adicionar(Fabricante fabricante);
         Task Atualizar(Fabricante fabricante);
-        Task Remover(Guid id);
+        Task Remover(Fabricante fabricante);
+        
     }
 }

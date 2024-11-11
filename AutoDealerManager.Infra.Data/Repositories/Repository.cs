@@ -18,34 +18,34 @@ namespace AutoDealerManager.Infra.Data.Repositories
             Db = db;
             DbSet = Db.Set<TEntity>();
         }
-        public virtual async Task<TEntity> ObterPorId(Guid id)
+        public virtual async Task<TEntity> ObterPorIdAsync(Guid id)
         {
             return await DbSet.FindAsync(id);
         }
-        public virtual async Task<IEnumerable<TEntity>> ObterTodos()
+        public virtual async Task<IEnumerable<TEntity>> ObterTodosAsync()
         {
             return await DbSet.AsNoTracking().ToListAsync();
         }
-        public async Task<IEnumerable<TEntity>> Buscar(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> BuscarAsync(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
         {
             return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
         }
-        public virtual async Task Adicionar(TEntity entity)
+        public virtual async Task AdicionarAsync(TEntity entity)
         {
             DbSet.Add(entity);
-            await SaveChanges();
+            await SaveChangesAsync();
         }
-        public virtual async Task Atualizar(TEntity entity)
+        public virtual async Task AtualizarAsync(TEntity entity)
         {
             Db.Entry(entity).State = EntityState.Modified;
-            await SaveChanges();
+            await SaveChangesAsync();
         }
-        public virtual async Task Remover(Guid id)
+        public virtual async Task RemoverAsync(TEntity entity)
         {
-            Db.Entry(new TEntity { Id = id }).State = EntityState.Deleted;
-            await SaveChanges();
+            Db.Entry(entity).State = EntityState.Deleted;
+            await SaveChangesAsync();
         }
-        public async Task<int> SaveChanges()
+        public async Task<int> SaveChangesAsync()
         {
             return await Db.SaveChangesAsync();
         }
