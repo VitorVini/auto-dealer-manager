@@ -1,0 +1,14 @@
+@model IEnumerable<AutoDealerManager.MVC.ViewModels.VendaVM>
+
+<div class="card">
+    <div class="card-header">
+        <h3>Vendas</h3>
+        <a href="@Url.Action("RealizarVenda")" class="btn btn-primary">Adicionar nova venda</a>
+    </div>
+    <div class="card-body">
+        @if (@TempData["Sucesso"] != null) {
+            @Html.Partial("_Sucesso")
+        }
+        @Html.Partial("_Grid")
+    </div>
+</div>

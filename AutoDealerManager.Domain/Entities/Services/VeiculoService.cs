@@ -32,7 +32,7 @@ namespace AutoDealerManager.Domain.Entities.Services
         private async Task ValidarDadosVeiculoAsync(Veiculo veiculo)
         {
             if (!ExecutarValidacao(new VeiculoValidation(), veiculo))
-                throw new Exception("Erro de validação.");
+                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
 
             if (!AnoValidoUtils.ValidarAno(veiculo.AnoFabricacao))
                 throw new Exception("Ano inválido.");
@@ -40,8 +40,8 @@ namespace AutoDealerManager.Domain.Entities.Services
             if (!await _fabricanteRepository.FabricanteExisteAsync(veiculo.FabricanteId))
                 throw new Exception("Fabricante não vinculado.");
 
-            if (await _veiculoRepository.VeiculoExisteAsync(veiculo.Modelo))
-                throw new Exception("Já existe um veículo cadastrado com esse nome.");
+            if (await _veiculoRepository.VeiculoExisteAsync(veiculo.Id, veiculo.Modelo))
+                throw new Exception("Este veículo já foi cadastrado.");
         }
 
         public async Task Remover(Veiculo veiculo)

@@ -20,15 +20,15 @@ namespace AutoDealerManager.Infra.Data.Repositories
         }
         public virtual async Task<TEntity> ObterPorIdAsync(Guid id)
         {
-            return await DbSet.FindAsync(id);
+            return await DbSet
+                .Where(e => e.Id == id && e.Ativo)
+                .FirstOrDefaultAsync();
         }
         public virtual async Task<IEnumerable<TEntity>> ObterTodosAsync()
         {
-            return await DbSet.AsNoTracking().ToListAsync();
-        }
-        public async Task<IEnumerable<TEntity>> BuscarAsync(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate)
-        {
-            return await DbSet.AsNoTracking().Where(predicate).ToListAsync();
+            return await DbSet.AsNoTracking()
+                .Where(e => e.Ativo)
+                .ToListAsync();
         }
         public virtual async Task AdicionarAsync(TEntity entity)
         {
@@ -42,7 +42,8 @@ namespace AutoDealerManager.Infra.Data.Repositories
         }
         public virtual async Task RemoverAsync(TEntity entity)
         {
-            Db.Entry(entity).State = EntityState.Deleted;
+            entity.Ativo = false;
+            Db.Entry(entity).State = EntityState.Modified;
             await SaveChangesAsync();
         }
         public async Task<int> SaveChangesAsync()

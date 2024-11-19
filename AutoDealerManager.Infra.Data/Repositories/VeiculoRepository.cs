@@ -16,24 +16,33 @@ namespace AutoDealerManager.Infra.Data.Repositories
         {
 
         }
+
+        public async Task<IEnumerable<Veiculo>> ObterVeiculosComFabricantesAsync()
+        {
+            return await Db.Veiculos.Where(v => v.Ativo).Include(v => v.Fabricante).ToListAsync();
+        }
+
         public async Task<IEnumerable<Veiculo>> ObterPorModeloAsync(Guid fabricanteId, string modelo)
         {
-            return await DbSet.AsNoTracking().Where(v => v.Modelo == modelo && v.FabricanteId == fabricanteId).ToListAsync();
+            return await DbSet
+                .AsNoTracking()
+                .Where(v => v.Modelo == modelo && v.FabricanteId == fabricanteId && v.Ativo)
+                .ToListAsync();
         }
 
         public async Task<IEnumerable<Veiculo>> ObterPorFabricanteAsync(Guid fabricanteId)
         {
-            return await DbSet.AsNoTracking().Where(v => v.FabricanteId == fabricanteId).ToListAsync();
+            return await DbSet.AsNoTracking().Where(v => v.FabricanteId == fabricanteId && v.Ativo).ToListAsync();
         }
 
         public async Task<IEnumerable<Veiculo>> ObterPorTipoAsync(EnumVeiculo tipoVeiculo)
         {
-            return await DbSet.AsNoTracking().Where(v => v.TipoVeiculo == tipoVeiculo).ToListAsync();
+            return await DbSet.AsNoTracking().Where(v => v.TipoVeiculo == tipoVeiculo && v.Ativo).ToListAsync();
         }
 
-        public async Task<bool> VeiculoExisteAsync(string modelo)
+        public async Task<bool> VeiculoExisteAsync(Guid Id, string modelo)
         {
-            return await DbSet.AsNoTracking().AnyAsync(v => v.Modelo == modelo);
+            return await DbSet.AsNoTracking().AnyAsync(v => v.Modelo == modelo && v.FabricanteId == Id && v.Ativo);
         }
 
     }

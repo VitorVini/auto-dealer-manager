@@ -25,7 +25,6 @@ namespace AutoDealerManager.Infra.CrossCutting.IoC
             container.Register<IVeiculoRepository, VeiculoRepository>(Lifestyle.Scoped);
             container.Register<IVendaRepository, VendaRepository>(Lifestyle.Scoped);
             container.Register<IClienteRepository, ClienteRepository>(Lifestyle.Scoped);
-            container.Register<IEnderecoRepository, EnderecoRepository>(Lifestyle.Scoped);
 
             container.Register<IConcessionariaService, ConcessionariaService>(Lifestyle.Scoped);
             container.Register<IFabricanteService, FabricanteService>(Lifestyle.Scoped);

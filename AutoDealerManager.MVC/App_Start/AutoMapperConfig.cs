@@ -29,7 +29,6 @@ namespace AutoDealerManager.MVC.App_Start
         public AutoMapperProfile()
         {
             CreateMap<Fabricante, FabricanteVM>().ReverseMap();
-            CreateMap<Endereco, EnderecoVM>().ReverseMap();
             CreateMap<Concessionaria, ConcessionariaVM>().ReverseMap();
             CreateMap<Cliente, ClienteVM>().ReverseMap();
             CreateMap<Usuario, UsuarioVM>().ReverseMap();

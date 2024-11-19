@@ -17,20 +17,32 @@ namespace AutoDealerManager.Infra.Data.Repositories
         }
         public async Task<IEnumerable<Venda>> ObterPorDataAsync(DateTime dataInicio, DateTime dataFim)
         {
-            return await DbSet.AsNoTracking()
-                          .Where(v => v.DataVenda >= dataInicio && v.DataVenda <= dataFim)
-                          .ToListAsync();
+            return await DbSet
+                .AsNoTracking()
+                .Where(v => v.Data >= dataInicio && v.Data <= dataFim && v.Ativo)
+                .ToListAsync();
         }
 
-        public async Task<Venda> ObterPorProtocoloAsync(string protocolo)
+        public async Task<Venda> ObterPorProtocoloAsync(long protocolo)
         {
-            return await DbSet.AsNoTracking().FirstOrDefaultAsync(v => v.Protocolo == protocolo);
+            return await DbSet.AsNoTracking().FirstOrDefaultAsync(v => v.Protocolo == protocolo && v.Ativo);
         }
 
         public async Task<bool> VerificarPrecoValidoAsync(Guid veiculoId, decimal precoVenda)
         {
-            var veiculo = await Db.Veiculos.AsNoTracking().FirstOrDefaultAsync(v => v.Id == veiculoId);
+            var veiculo = await Db.Veiculos.AsNoTracking().FirstOrDefaultAsync(v => v.Id == veiculoId && v.Ativo);
             return veiculo != null && precoVenda <= veiculo.Preco;
+        }
+
+        public override async Task<IEnumerable<Venda>> ObterTodosAsync()
+        {
+            return await DbSet
+                .Where(v => v.Ativo)
+                .Include(v => v.Cliente)
+                .Include(v => v.Veiculo)
+                .Include(v => v.Concessionaria)
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }

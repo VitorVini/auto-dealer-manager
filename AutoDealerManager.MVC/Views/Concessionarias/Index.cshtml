@@ -3,36 +3,12 @@
 <div class="card">
     <div class="card-header">
         <h3>Concessionarias</h3>
-        <a href="@Url.Action("Create")" class="btn btn-primary">Novo</a>
+        <a href="@Url.Action("Create")" class="btn btn-primary">Cadastrar Nova Concession�ria</a>
     </div>
     <div class="card-body">
         @if (@TempData["Sucesso"] != null) {
             @Html.Partial("_Sucesso")
         }
-        <table class="table table-striped">
-            <thead>
-                <th>Nome</th>
-                <th>Endereço</th>
-                <th>Telefone</th>
-                <th>E-mail</th>
-                <th>Capacidade máxima de veiculos</th>
-                <th></th>
-            </thead>
-            <tbody>
-                @foreach(var concessionaria in Model) {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => concessionaria.Nome)</td>
-                        <td>@Html.DisplayFor(modelItem => concessionaria.Endereco.ToString())</td>
-                        <td>@Html.DisplayFor(modelItem => concessionaria.Telefone)</td>
-                        <td>@Html.DisplayFor(modelItem => concessionaria.Email)</td>
-                        <td>@Html.DisplayFor(modelItem => concessionaria.CapacidadeMaximaVeiculos)</td>
-                        <td>
-                            <a class="btn btn-warning" href="@Url.Action("Edit", "Concessionarias", new { id = concessionaria.Id })">Editar</a>
-                            <a class="btn btn-danger" href="@Url.Action("Delete", "Concessionarias", new { id = concessionaria.Id })">Excluir</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        @Html.Partial("_Grid")
     </div>
 </div>

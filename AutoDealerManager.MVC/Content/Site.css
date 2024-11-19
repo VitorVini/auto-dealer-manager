@@ -18,3 +18,25 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/* Fazendo com que o conteúdo dentro do modal tenha rolagem se necessário */
+/*#modalContent {
+    max-height: 400px;*/ /* Ajuste conforme necessário */
+    /*overflow-y: auto;
+}*/
+
+/* Fazendo o modal se ajustar ao tamanho do conteúdo */
+.modal-dialog {
+    max-width: 90%; /* O modal pode ocupar até 90% da largura da tela */
+    width: auto; /* Ajusta a largura automaticamente conforme o conteúdo */
+}
+
+/*.modal-dialog.modal-lg {
+    max-width: 80%;*/ /* Ajuste a largura máxima do modal */
+/*}*/
+
+/* Ajuste de largura da tabela para que se ajuste dentro do modal */
+/*table {
+    width: 100%;
+    table-layout: fixed;*/ /* Garante que as colunas tenham tamanho fixo */
+/*}*/

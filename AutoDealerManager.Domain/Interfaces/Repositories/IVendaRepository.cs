@@ -8,7 +8,7 @@ namespace AutoDealerManager.Domain.Interfaces.Repositories
 {
     public interface IVendaRepository : IRepository<Venda>
     {
-        Task<Venda> ObterPorProtocoloAsync(string protocolo);
+        Task<Venda> ObterPorProtocoloAsync(long protocolo);
         Task<bool> VerificarPrecoValidoAsync(Guid veiculoId, decimal precoVenda);
         Task<IEnumerable<Venda>> ObterPorDataAsync(DateTime dataInicio, DateTime dataFim);
     }

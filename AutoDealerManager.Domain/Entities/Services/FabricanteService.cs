@@ -4,9 +4,6 @@ using AutoDealerManager.Domain.Entities.Validations;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
 using System;
-using System.Linq;
-using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace AutoDealerManager.Domain.Entities.Services
@@ -34,12 +31,12 @@ namespace AutoDealerManager.Domain.Entities.Services
         private async Task ValidarDadosFabricanteAsync(Fabricante fabricante)
         {
             if (!ExecutarValidacao(new FabricanteValidation(), fabricante))
-                throw new Exception("Erro de validação.");
+                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
 
             if (await _fabricanteRepository.NomeExisteAsync(fabricante.Id, fabricante.Nome))
                 throw new Exception("Já existe um fabricante cadastrado com esse nome.");
 
-            if (!await WebsiteAcessivelAsync(fabricante.Website, new CancellationToken()))
+            if (!WebsiteAcessivel(fabricante.Website))
                 throw new Exception("Website não está acessível, favor verificar.");
 
             if (!AnoValidoUtils.ValidarAno(fabricante.AnoFundacao))
@@ -48,31 +45,29 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         public async Task Remover(Fabricante fabricante)
         {
-            var fabricanteVeiculos = await _fabricanteRepository.ObterFabricanteVeiculosAsync(fabricante.Id);
-
-            if (fabricanteVeiculos.Veiculos.Any())
-            {
-                return; // TO DO 
-            }
-
             await _fabricanteRepository.RemoverAsync(fabricante);
         }
 
-        public async Task<bool> WebsiteAcessivelAsync(string website, CancellationToken cancellationToken)
+        //public async Task<bool> WebsiteAcessivelAsync(string website, CancellationToken cancellationToken)
+        //{
+        //    try
+        //    {
+        //        using (var client = new HttpClient())
+        //        {
+        //            client.Timeout = TimeSpan.FromSeconds(5);
+        //            var response = await client.GetAsync(website, cancellationToken);
+        //            return response.IsSuccessStatusCode;
+        //        }
+        //    }
+        //    catch
+        //    {
+        //        return false;
+        //    }
+        //}
+
+        public bool WebsiteAcessivel(string website)
         {
-            try
-            {
-                using (var client = new HttpClient())
-                {
-                    client.Timeout = TimeSpan.FromSeconds(5);
-                    var response = await client.GetAsync(website, cancellationToken);
-                    return response.IsSuccessStatusCode;
-                }
-            }
-            catch
-            {
-                return false;
-            }
+            return WebsiteValidoUtils.IsUrlValid(website);
         }
 
         public void Dispose()

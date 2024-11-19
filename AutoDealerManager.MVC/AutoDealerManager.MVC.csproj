@@ -147,6 +147,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\FabricantesController.cs" />
+    <Compile Include="Controllers\VendasController.cs" />
     <Compile Include="Controllers\VeiculosController.cs" />
     <Compile Include="Controllers\ConcessionariasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -156,7 +157,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ClienteVM.cs" />
     <Compile Include="ViewModels\ConcessionariaVM.cs" />
-    <Compile Include="ViewModels\EnderecoVM.cs" />
     <Compile Include="ViewModels\FabricanteVM.cs" />
     <Compile Include="ViewModels\UsuarioVM.cs" />
     <Compile Include="ViewModels\VeiculoVM.cs" />
@@ -198,6 +198,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\vendas.js" />
+    <Content Include="Scripts\site.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -219,6 +221,18 @@
     <Content Include="Views\Fabricantes\Form.cshtml" />
     <Content Include="Views\Veiculos\Index.cshtml" />
     <Content Include="Views\Veiculos\Form.cshtml" />
+    <Content Include="Views\Shared\_Erro.cshtml" />
+    <Content Include="Views\Shared\_Sucesso.cshtml" />
+    <Content Include="Views\Fabricantes\_ModalFabricantes.cshtml" />
+    <Content Include="Views\Fabricantes\_Grid.cshtml" />
+    <Content Include="Views\Concessionarias\_Grid.cshtml" />
+    <Content Include="Views\Concessionarias\_FormEndereco.cshtml" />
+    <Content Include="Views\Veiculos\_Grid.cshtml" />
+    <Content Include="Views\Vendas\_Grid.cshtml" />
+    <Content Include="Views\Vendas\Form.cshtml" />
+    <Content Include="Views\Vendas\Index.cshtml" />
+    <Content Include="Views\Veiculos\_Modal.cshtml" />
+    <Content Include="Views\Concessionarias\_Modal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

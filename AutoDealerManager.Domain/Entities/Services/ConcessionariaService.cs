@@ -10,33 +10,20 @@ namespace AutoDealerManager.Domain.Entities.Services
     public class ConcessionariaService : BaseService, IConcessionariaService
     {
         private readonly IConcessionariaRepository _concessionariaRepository;
-        private readonly IEnderecoRepository _enderecoRepository;
 
-        public ConcessionariaService(IConcessionariaRepository concessionariaRepository, IEnderecoRepository enderecoRepository)
+        public ConcessionariaService(IConcessionariaRepository concessionariaRepository)
         {
             _concessionariaRepository = concessionariaRepository;
-            _enderecoRepository = enderecoRepository;
         }
         public async Task Adicionar(Concessionaria concessionaria)
         {
-            // TO DO TESTAR 
-            //concessionaria.Endereco.Id = concessionaria.Id;
-            //concessionaria.Endereco.Concessionaria = concessionaria;
-
-            if (!ExecutarValidacao(new ConcessionariaValidation(), concessionaria) ||
-                !ExecutarValidacao(new EnderecoValidation(), concessionaria.Endereco)) return;
-
-            if (await _concessionariaRepository.ConcessionariaExisteAsync(concessionaria.Nome)) return;
-
+            await ValidarDadosConcessionariaAsync(concessionaria);
             await _concessionariaRepository.AdicionarAsync(concessionaria);
         }
 
-        public async Task Atualizar(Concessionaria concessionaria) // Não terei que atualizar nada no sistema
+        public async Task Atualizar(Concessionaria concessionaria)
         {
-            if (!ExecutarValidacao(new ConcessionariaValidation(), concessionaria)) return;
-
-            if (await _concessionariaRepository.ConcessionariaExisteAsync(concessionaria.Nome)) return;
-
+            await ValidarDadosConcessionariaAsync(concessionaria);
             await _concessionariaRepository.AtualizarAsync(concessionaria);
         }
 
@@ -45,10 +32,18 @@ namespace AutoDealerManager.Domain.Entities.Services
             await _concessionariaRepository.RemoverAsync(concessionaria);
         }
 
+        private async Task ValidarDadosConcessionariaAsync(Concessionaria concessionaria)
+        {
+            if (!ExecutarValidacao(new ConcessionariaValidation(), concessionaria))
+                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
+
+            if (await _concessionariaRepository.ConcessionariaExisteAsync(concessionaria.Id, concessionaria.Nome))
+                throw new Exception("Esta concessionária já foi cadastrada.");
+        }
+
         public void Dispose()
         {
             _concessionariaRepository?.Dispose();
-            _enderecoRepository?.Dispose();
         }
 
     }

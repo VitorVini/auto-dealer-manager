@@ -1,17 +1,18 @@
-@model AutoDealerManager.MVC.ViewModels.FabricanteVM
+@model AutoDealerManager.MVC.ViewModels.ConcessionariaVM
 @{
-    ViewBag.Title = "Adicionar Novo Fabricante";
+    ViewBag.Title = "Adicionar Nova Concessionaria";
     bool isUpdate = Model?.IsUpdate != null;
 }
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("Salvar", "Fabricantes", FormMethod.Post))
+@using (Html.BeginForm("Salvar", "Concessionarias", FormMethod.Post))
 {
     <div class="form-horizontal">
         @Html.AntiForgeryToken()
 
-        @if (@TempData["Erro"] != null) {
+        @if (@TempData["Erro"] != null)
+        {
             @Html.Partial("_Erro")
         }
 
@@ -25,31 +26,37 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.PaisOrigem, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.PaisOrigem, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.PaisOrigem, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(m => m.Telefone, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.AnoFundacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.AnoFundacao, new { @class = "form-control", type = "number" })
-            @Html.ValidationMessageFor(m => m.AnoFundacao, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Website, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Website, new { @class = "form-control", type = "url" })
-            @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
+            @Html.LabelFor(m => m.CapacidadeMaximaVeiculos, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.CapacidadeMaximaVeiculos, new { @class = "form-control", type = "number" })
+            @Html.ValidationMessageFor(m => m.CapacidadeMaximaVeiculos, "", new { @class = "text-danger" })
         </div>
+
+        @Html.Partial("_FormEndereco")
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-3">
                 <input type="submit" value="@(isUpdate ? "Salvar" : "Cadastrar")" class="btn btn-primary" />
-                <a class="btn btn-info" href="@Url.Action("Index", "Fabricantes")">Voltar</a>
+                <a class="btn btn-info" href="@Url.Action("Index", "Concessionarias")">Voltar</a>
             </div>
         </div>
     </div>
 }
-        @section Scripts {
-            @Scripts.Render("~/bundles/jqueryval")
-        }
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+     buscaCep();
+    </script>
+}

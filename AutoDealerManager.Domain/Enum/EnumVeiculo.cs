@@ -5,5 +5,14 @@
         Carro,
         Moto,
         Caminhao,
+        Hatch,
+        Sedan,
+        SUV,
+        Picape,
+        Coupé,
+        Conversível,
+        Perua,
+        Minivan,
+        Sport,
     }
 }

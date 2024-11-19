@@ -6,31 +6,11 @@
         <a href="@Url.Action("Create")" class="btn btn-primary">Novo</a>
     </div>
     <div class="card-body">
-        @if (@TempData["Sucesso"] != null) {
+        @if (@TempData["Sucesso"] != null)
+        {
             @Html.Partial("_Sucesso")
         }
-        <table class="table table-striped">
-            <thead>
-                <th>Nome</th>
-                <th>País de origem</th>
-                <th>Ano de fundação</th>
-                <th>Website</th>
-                <th></th>
-            </thead>
-            <tbody>
-                @foreach(var fabricante in Model) {
-                    <tr>
-                        <td>@Html.DisplayFor(modelItem => fabricante.Nome)</td>
-                        <td>@Html.DisplayFor(modelItem => fabricante.PaisOrigem)</td>
-                        <td>@Html.DisplayFor(modelItem => fabricante.AnoFundacao)</td>
-                        <td>@Html.DisplayFor(modelItem => fabricante.Website)</td>
-                        <td>
-                            <a class="btn btn-warning" href="@Url.Action("Edit", "Fabricantes", new { id = fabricante.Id })">Editar</a>
-                            <a class="btn btn-danger" href="@Url.Action("Delete", "Fabricantes", new { id = fabricante.Id })">Excluir</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+
+        @Html.Partial("_Grid")
     </div>
 </div>

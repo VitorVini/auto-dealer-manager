@@ -27,8 +27,24 @@ namespace AutoDealerManager.Infra.Data.EntityConfig
             Property(c => c.CapacidadeMaximaVeiculos)
                 .IsRequired();
 
-            HasRequired(c => c.Endereco)
-                .WithRequiredPrincipal(e => e.Concessionaria);
+            Property(c => c.Rua)
+                .IsRequired()
+                .HasMaxLength(255);
+
+            Property(c => c.Cidade)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            Property(c => c.Estado)
+                .IsRequired()
+                .HasMaxLength(50);
+
+            Property(c => c.CEP)
+                .IsRequired()
+                .HasMaxLength(10);
+
+            Property(c => c.Numero)
+                .IsRequired();
 
             HasMany(c => c.Vendas)
             .WithRequired(v => v.Concessionaria)

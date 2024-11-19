@@ -1,9 +1,7 @@
 ﻿using AutoDealerManager.Domain.Enum;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Mvc;
 
 namespace AutoDealerManager.MVC.ViewModels
 {
@@ -32,7 +30,11 @@ namespace AutoDealerManager.MVC.ViewModels
         public decimal Preco { get; set; }
 
         [Required(ErrorMessage = "O fabricante é obrigatório.")]
-        public int FabricanteId { get; set; }
+        [DisplayName("Fabricante")]
+        public Guid FabricanteId { get; set; }
+
+        [DisplayName("Fabricante")]
+        public FabricanteVM Fabricante { get; set; }
 
         [DisplayName("Tipo de veículo")]
         [Required(ErrorMessage = "O tipo de veículo é obrigatório.")]
@@ -41,9 +43,6 @@ namespace AutoDealerManager.MVC.ViewModels
         [DisplayName("Descrição")]
         [StringLength(1000, ErrorMessage = "A descrição deve ter no máximo 1000 caracteres.")]
         public string Descricao { get; set; }
-
-        // Lista para popular o dropdown de fabricantes na tela
-        public IEnumerable<SelectListItem> Fabricantes { get; set; }
         public bool IsUpdate { get; set; }
     }
 }

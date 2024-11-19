@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AutoDealerManager.MVC.ViewModels.VeiculoVM>
+
+<table  id="tblVeiculos" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Modelo)</th>
+            <th>@Html.DisplayNameFor(model => model.AnoFabricacao)</th>
+            <th>@Html.DisplayNameFor(model => model.Preco)</th>
+            <th>@Html.DisplayNameFor(model => model.FabricanteId)</th>
+            <th>@Html.DisplayNameFor(model => model.TipoVeiculo)</th>
+            <th>@Html.DisplayNameFor(model => model.Descricao)</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var veiculo in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => veiculo.Modelo)</td>
+                <td>@Html.DisplayFor(modelItem => veiculo.AnoFabricacao)</td>
+                <td>@Html.DisplayFor(modelItem => veiculo.Preco)</td>
+                <td>@Html.DisplayFor(modelItem => veiculo.Fabricante.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => veiculo.TipoVeiculo)</td>
+                <td>@Html.DisplayFor(modelItem => veiculo.Descricao)</td>
+                <td>
+                    <a class="btn btn-primary" data-bs-dismiss="modal" onclick="selecionarVeiculo('@veiculo.Id', '@veiculo.Modelo')"><i class="bi bi-check"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    inicializarDataTable('#tblVeiculos');
+</script>

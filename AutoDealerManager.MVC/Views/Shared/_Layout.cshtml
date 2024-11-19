@@ -3,9 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - AutoDealerManager</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" />
 </head>
 <body>
     <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
@@ -21,7 +23,25 @@
                     <li>@Html.ActionLink("Fabricantes", "Index", "Fabricantes", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Veiculos", "Index", "Veiculos", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Concessionárias", "Index", "Concessionarias", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Vendas", "Index", "Vendas", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
+            </div>
+            <div id="loading" class="spinner-border text-primary" role="status" style="display: none; width: 3rem; height: 3rem;" >
+                <span class="visually-hidden">Carregando...</span>
+            </div>
+            <div id="divModal" class="modal" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 id="modalTitle" class="modal-title"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="modalContent">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -29,12 +49,15 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - AutoDealerManager</p>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/site")
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.13.4/i18n/Portuguese-Brasil.json"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

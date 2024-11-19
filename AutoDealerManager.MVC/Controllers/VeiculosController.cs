@@ -1,11 +1,13 @@
 using AutoDealerManager.CrossCutting.Helpers.Validations;
 using AutoDealerManager.Domain.Entities;
+using AutoDealerManager.Domain.Enum;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
 using AutoDealerManager.MVC.ViewModels;
 using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -16,46 +18,54 @@ namespace AutoDealerManager.MVC.Controllers
     {
         private readonly IVeiculoService _veiculoService;
         private readonly IVeiculoRepository _veiculoRepository;
+        private readonly IFabricanteRepository _fabricanteRepository;
         private readonly IMapper _mapper;
         public VeiculosController(IVeiculoService veiculoService,
                                      IVeiculoRepository veiculoRepository,
-                                     IMapper mapper)
+                                     IMapper mapper,
+                                     IFabricanteRepository fabricanteRepository)
         {
             _veiculoService = veiculoService;
             _veiculoRepository = veiculoRepository;
             _mapper = mapper;
+            _fabricanteRepository = fabricanteRepository;
         }
 
         [Route("veiculos")]
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            var veiculos = _mapper.Map<IEnumerable<VeiculoVM>>(await _veiculoRepository.ObterTodosAsync());
+            await CarregarViewbagsAsync();
+            var veiculos = _mapper.Map<IEnumerable<VeiculoVM>>(await _veiculoRepository.ObterVeiculosComFabricantesAsync());
             return View(veiculos);
         }
 
         [Route("novo-veiculo")]
-
-        // GET: Veiculos/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
+            await CarregarViewbagsAsync();
             return View("Form", new VeiculoVM());
         }
 
-        // POST: Veiculos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("novo-veiculo")]
         public async Task<ActionResult> Salvar(VeiculoVM veiculoVM)
         {
-            try {
-                if (!ModelState.IsValid) {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
                     TempData["Erro"] = ValidationUtils.ObterErroValidacaoViewModel(ModelState);
+
+                    await CarregarViewbagsAsync();
+
                     return View("Form", veiculoVM);
                 }
-                
+
                 var veiculo = _mapper.Map<Veiculo>(veiculoVM);
-                if (veiculoVM.IsUpdate)          
+
+                if (veiculoVM.IsUpdate)
                     await _veiculoService.Atualizar(veiculo);
                 else
                     await _veiculoService.Adicionar(veiculo);
@@ -63,17 +73,20 @@ namespace AutoDealerManager.MVC.Controllers
                 TempData["Sucesso"] = "Operação realizada com sucesso!";
                 return RedirectToAction("Index");
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 TempData["Erro"] = exception.Message;
+
+                await CarregarViewbagsAsync();
+
                 return View("Form", veiculoVM);
             }
-            
+
         }
 
-        // GET: Veiculos/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
+            await CarregarViewbagsAsync();
             var veiculoVM = _mapper.Map<VeiculoVM>(await _veiculoRepository.ObterPorIdAsync(id));
 
             if (veiculoVM == null)
@@ -85,7 +98,6 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", veiculoVM);
         }
 
-        // POST: Veiculos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Guid id, VeiculoVM veiculoVM)
@@ -101,7 +113,6 @@ namespace AutoDealerManager.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // POST: Veiculos/Delete/5
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
@@ -113,6 +124,20 @@ namespace AutoDealerManager.MVC.Controllers
 
             TempData["Sucesso"] = "Veiculo removido com sucesso!";
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ObterModal()
+        {
+            var veiculos = _mapper.Map<IEnumerable<VeiculoVM>>(await _veiculoRepository.ObterVeiculosComFabricantesAsync());
+            return PartialView("_Modal", veiculos);
+        }
+
+        private async Task CarregarViewbagsAsync()
+        {
+            ViewBag.Fabricantes = new SelectList((await _fabricanteRepository.ObterTodosAsync()).Select(f => new SelectListItem { Value = f.Id.ToString(), Text = f.Nome }), "Value", "Text");
+
+            ViewBag.TiposVeiculo = new SelectList(Enum.GetValues(typeof(EnumVeiculo)).Cast<EnumVeiculo>().Select(t => new SelectListItem { Value = ((int)t).ToString(), Text = t.ToString() }).ToList(), "Value", "Text");
         }
     }
 }

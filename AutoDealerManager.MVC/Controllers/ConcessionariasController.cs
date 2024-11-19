@@ -34,28 +34,28 @@ namespace AutoDealerManager.MVC.Controllers
             return View(concessionarias);
         }
 
-        [Route("novo-concessionaria")]
+        [Route("nova-concessionaria")]
 
-        // GET: Concessionarias/Create
         public ActionResult Create()
         {
             return View("Form", new ConcessionariaVM());
         }
 
-        // POST: Concessionarias/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("novo-concessionaria")]
+        [Route("nova-concessionaria")]
         public async Task<ActionResult> Salvar(ConcessionariaVM concessionariaVM)
         {
-            try {
-                if (!ModelState.IsValid) {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
                     TempData["Erro"] = ValidationUtils.ObterErroValidacaoViewModel(ModelState);
                     return View("Form", concessionariaVM);
                 }
-                
+
                 var concessionaria = _mapper.Map<Concessionaria>(concessionariaVM);
-                if (concessionariaVM.IsUpdate)          
+                if (concessionariaVM.IsUpdate)
                     await _concessionariaService.Atualizar(concessionaria);
                 else
                     await _concessionariaService.Adicionar(concessionaria);
@@ -63,15 +63,14 @@ namespace AutoDealerManager.MVC.Controllers
                 TempData["Sucesso"] = "Operação realizada com sucesso!";
                 return RedirectToAction("Index");
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 TempData["Erro"] = exception.Message;
                 return View("Form", concessionariaVM);
             }
-            
+
         }
 
-        // GET: Concessionarias/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
             var concessionariaVM = _mapper.Map<ConcessionariaVM>(await _concessionariaRepository.ObterPorIdAsync(id));
@@ -85,7 +84,6 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", concessionariaVM);
         }
 
-        // POST: Concessionarias/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Guid id, ConcessionariaVM concessionariaVM)
@@ -97,11 +95,10 @@ namespace AutoDealerManager.MVC.Controllers
             var concessionaria = _mapper.Map<Concessionaria>(concessionariaVM);
             await _concessionariaService.Atualizar(concessionaria);
 
-            TempData["Sucesso"] = "Concessionaria atualizado com sucesso!";
+            TempData["Sucesso"] = "Concessionária atualizada com sucesso!";
             return RedirectToAction("Index", "Home");
         }
 
-        // POST: Concessionarias/Delete/5
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
@@ -111,8 +108,15 @@ namespace AutoDealerManager.MVC.Controllers
 
             await _concessionariaService.Remover(concessionaria);
 
-            TempData["Sucesso"] = "Concessionaria removido com sucesso!";
+            TempData["Sucesso"] = "Concessionária removida com sucesso!";
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ObterModal()
+        {
+            var concessionarias = _mapper.Map<IEnumerable<ConcessionariaVM>>(await _concessionariaRepository.ObterTodosAsync());
+            return PartialView("_Modal", concessionarias);
         }
     }
 }

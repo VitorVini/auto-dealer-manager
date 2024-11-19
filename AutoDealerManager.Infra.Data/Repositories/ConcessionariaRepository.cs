@@ -11,35 +11,14 @@ namespace AutoDealerManager.Infra.Data.Repositories
     {
         public ConcessionariaRepository(AutoDealerManagerContext context) : base(context) { }
 
-        public async Task<Concessionaria> ObterConcessionariaEndereco(Guid id)
-        {
-            return await Db.Concessionarias.AsNoTracking()
-                .Include(c => c.Endereco)
-                .FirstOrDefaultAsync(c => c.Id == id);
-        }
-
         public async Task<Concessionaria> ObterPorNomeAsync(string nome)
         {
-            return await DbSet.AsNoTracking().FirstOrDefaultAsync(c => c.Nome == nome);
+            return await DbSet.FirstOrDefaultAsync(c => c.Nome == nome && c.Ativo);
         }
 
-        public async Task<bool> ConcessionariaExisteAsync(string nome)
+        public async Task<bool> ConcessionariaExisteAsync(Guid Id, string nome)
         {
-            return await DbSet.AsNoTracking().AnyAsync(c => c.Nome == nome);
+            return await DbSet.AnyAsync(c => c.Nome == nome && c.Id == Id && c.Ativo);
         }
-
-        public async Task<Concessionaria> ObterPorEnderecoAsync(Endereco endereco)
-        {
-            return await Db.Concessionarias
-                .Include(c => c.Endereco)
-                .AsNoTracking()
-                .FirstOrDefaultAsync(c =>
-                c.Endereco.CEP == endereco.CEP &&
-                c.Endereco.Estado == endereco.Estado &&
-                c.Endereco.Cidade == endereco.Cidade &&
-                c.Endereco.Rua == endereco.Rua &&
-                c.Endereco.Numero == endereco.Numero);
-        }
-
     }
 }

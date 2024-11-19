@@ -22,7 +22,7 @@ namespace AutoDealerManager.Infra.Data.Repositories
 
         public IEnumerable<Usuario> ObterTodos()
         {
-            return _db.Usuarios.ToList();
+            return _db.Usuarios.Where(u => u.Ativo).ToList();
         }
         public void DesativarLock(Guid id)
         {

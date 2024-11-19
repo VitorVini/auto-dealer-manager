@@ -1,0 +1,31 @@
+﻿@model IEnumerable<AutoDealerManager.MVC.ViewModels.VendaVM>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Protocolo)</th>
+            <th>@Html.DisplayNameFor(model => model.Veiculo.Modelo)</th>
+            <th>@Html.DisplayNameFor(model => model.NomeConcessionaria)</th>
+            <th>@Html.DisplayNameFor(model => model.Cliente)</th>
+            <th>@Html.DisplayNameFor(model => model.Data)</th>
+            <th>@Html.DisplayNameFor(model => model.Preco)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var venda in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => venda.Protocolo)</td>
+                <td>@Html.DisplayFor(modelItem => venda.Veiculo.Modelo)</td>
+                <td>@Html.DisplayFor(modelItem => venda.Concessionaria.Nome)</td>
+                <td>@venda.Cliente</td>
+                <td>@Html.DisplayFor(modelItem => venda.Data)</td>
+                <td>@Html.DisplayFor(modelItem => venda.Preco)</td>
+                <td style="width:160px">
+                    <a class="btn btn-warning" href="@Url.Action("Edit", "Vendas", new { id = venda.Id })">Editar</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Vendas", new { id = venda.Id })">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

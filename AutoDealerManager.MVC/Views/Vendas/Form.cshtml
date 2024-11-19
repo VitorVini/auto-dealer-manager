@@ -1,0 +1,91 @@
+@model AutoDealerManager.MVC.ViewModels.VendaVM
+@{
+    ViewBag.Title = "Adicionar Nova Venda";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (Html.BeginForm("RealizarVenda", "Vendas", FormMethod.Post))
+{
+    <div class="form-horizontal">
+        @Html.AntiForgeryToken()
+
+        @if (@TempData["Erro"] != null)
+        {
+            @Html.Partial("_Erro")
+        }
+
+        @Html.HiddenFor(m => m.Id)
+        @Html.HiddenFor(m => m.VeiculoId)
+        @Html.HiddenFor(m => m.ConcessionariaId)
+        @Html.HiddenFor(m => m.ClienteId)
+
+        <div class="form-group">
+            @Html.Label("Veículo", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="row">
+                <div class="col-auto">
+                    @Html.TextBox("NomeVeiculo", null, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-auto">
+                    <button id="btn-procurar-veiculos" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(m => m.VeiculoId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Concessionária", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="row">
+                <div class="col-auto">
+                    @Html.TextBox("NomeConcessionaria", null, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-auto">
+                    <button id="btn-procurar-concessionarias" class="btn btn-primary"><i class="bi bi-search"></i></button>
+                </div>
+            </div>
+            @Html.ValidationMessageFor(m => m.ConcessionariaId, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cliente.CPF, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Cliente.CPF, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Cliente.CPF, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cliente.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Cliente.Nome, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Cliente.Nome, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Cliente.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Cliente.Telefone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Cliente.Telefone, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Data, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Data, new { @class = "form-control", type = "date" })
+            @Html.ValidationMessageFor(m => m.Data, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Preco, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.TextBoxFor(m => m.Preco, new { @class = "form-control", type = "decimal" })
+            @Html.ValidationMessageFor(m => m.Preco, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-3">
+                <input type="submit" value="Finalizar Venda" class="btn btn-primary" />
+                <a class="btn btn-info" href="@Url.Action("Index", "Vendas")">Voltar</a>
+            </div>
+        </div>
+
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/vendas.js")
+}

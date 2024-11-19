@@ -28,36 +28,26 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         public async Task Adicionar(Venda venda)
         {
-            if (!ExecutarValidacao(new VendaValidation(), venda)) return;
+            var cliente = await _clienteRepository.ObterPorCpfAsync(venda.Cliente.CPF);
+            if (cliente != null)
+                venda.Cliente.Id = cliente.Id;
+            else
+                venda.Cliente.Id = Guid.NewGuid();
+            venda.ClienteId = venda.Cliente.Id;
 
-            var veiculo = await _veiculoRepository.ObterPorIdAsync(venda.VeiculoId);
-            if (veiculo == null) return;
+            await ValidarDadosVendaAsync(venda);
 
-            if (venda.PrecoVenda > veiculo.Preco) return;
-
-            var cliente = await _clienteRepository.ObterPorIdAsync(venda.ClienteId);
-            if (cliente == null) return;
-
-            var concessionaria = await _concessionariaRepository.ObterPorIdAsync(venda.ConcessionariaId);
-            if (concessionaria == null) return;
-
-            venda.Protocolo = Guid.NewGuid().ToString();
+            venda.Protocolo = long.Parse(DateTime.Now.ToString("yyyyMMddHHmmssfff"));
 
             await _vendaRepository.AdicionarAsync(venda);
         }
 
         public async Task Atualizar(Venda venda)
         {
-            var veiculo = await _veiculoRepository.ObterPorIdAsync(venda.VeiculoId);
-            if (veiculo == null) return;
-
-            if (venda.PrecoVenda > veiculo.Preco) return;
+            await ValidarDadosVendaAsync(venda);
 
             var cliente = await _clienteRepository.ObterPorIdAsync(venda.ClienteId);
             if (cliente == null) return;
-
-            var concessionaria = await _concessionariaRepository.ObterPorIdAsync(venda.ConcessionariaId);
-            if (concessionaria == null) return;
 
             await _vendaRepository.AtualizarAsync(venda);
         }
@@ -65,6 +55,26 @@ namespace AutoDealerManager.Domain.Entities.Services
         public async Task Remover(Venda venda)
         {
             await _vendaRepository.RemoverAsync(venda);
+        }
+
+        private async Task ValidarDadosVendaAsync(Venda venda)
+        {
+            if (!ExecutarValidacao(new VendaValidation(), venda))
+                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
+
+            if (!ExecutarValidacao(new ClienteValidation(), venda.Cliente))
+                throw new Exception($"Erro validação do cliente: {string.Join(",", errors)}");
+
+            var veiculo = await _veiculoRepository.ObterPorIdAsync(venda.VeiculoId);
+
+            if (veiculo == null)
+                throw new Exception("Este veículo não existe ou não está disponível");
+
+            if (await _concessionariaRepository.ObterPorIdAsync(venda.ConcessionariaId) == null)
+                throw new Exception("Esta concessionária não existe ou não está disponível");
+
+            if (venda.Preco < veiculo.Preco)
+                throw new Exception("Não é possível vender um veículo com um preço menor do que o cadastrado");
         }
 
         public void Dispose()

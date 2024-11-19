@@ -8,9 +8,9 @@ namespace AutoDealerManager.Domain.Entities
         public Guid VeiculoId { get; set; }
         public Guid ConcessionariaId { get; set; }
         public Guid ClienteId { get; set; }
-        public DateTime DataVenda { get; set; }
-        public decimal PrecoVenda { get; set; }
-        public string Protocolo { get; set; }
+        public DateTime Data { get; set; }
+        public decimal Preco { get; set; }
+        public long Protocolo { get; set; }
 
         // EF Relations
         public virtual Veiculo Veiculo { get; set; }

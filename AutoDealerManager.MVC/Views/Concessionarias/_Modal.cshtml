@@ -1,0 +1,32 @@
+@model IEnumerable<AutoDealerManager.MVC.ViewModels.ConcessionariaVM>
+
+<table id="tblConcessionarias" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayName("Endereço")</th>
+            <th>@Html.DisplayNameFor(model => model.Telefone)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.CapacidadeMaximaVeiculos)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var concessionaria in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => concessionaria.Nome)</td>
+                <td>@concessionaria.ObterEndereco()</td>
+                <td>@Html.DisplayFor(modelItem => concessionaria.Telefone)</td>
+                <td>@Html.DisplayFor(modelItem => concessionaria.Email)</td>
+                <td>@Html.DisplayFor(modelItem => concessionaria.CapacidadeMaximaVeiculos)</td>
+                <td>
+                    <a class="btn btn-primary" data-bs-dismiss="modal" onclick="selecionarConcessionaria('@concessionaria.Id', '@concessionaria.Nome')"><i class="bi bi-check"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<script type="text/javascript">
+    inicializarDataTable('#tblConcessionarias');
+</script>

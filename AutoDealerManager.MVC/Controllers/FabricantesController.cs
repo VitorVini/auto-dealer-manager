@@ -36,13 +36,11 @@ namespace AutoDealerManager.MVC.Controllers
 
         [Route("novo-fabricante")]
 
-        // GET: Fabricantes/Create
         public ActionResult Create()
         {
             return View("Form", new FabricanteVM());
         }
 
-        // POST: Fabricantes/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("novo-fabricante")]
@@ -73,7 +71,6 @@ namespace AutoDealerManager.MVC.Controllers
 
         }
 
-        // GET: Fabricantes/Edit/5
         public async Task<ActionResult> Edit(Guid id)
         {
             var fabricanteVM = _mapper.Map<FabricanteVM>(await _fabricanteRepository.ObterPorIdAsync(id));
@@ -87,7 +84,6 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", fabricanteVM);
         }
 
-        // POST: Fabricantes/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Guid id, FabricanteVM fabricanteVM)
@@ -103,7 +99,6 @@ namespace AutoDealerManager.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        // POST: Fabricantes/Delete/5
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
@@ -115,6 +110,13 @@ namespace AutoDealerManager.MVC.Controllers
 
             TempData["Sucesso"] = "Fabricante removido com sucesso!";
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ObterModalFabricantes()
+        {
+            var fabricantes = _mapper.Map<IEnumerable<FabricanteVM>>(await _fabricanteRepository.ObterTodosAsync());
+            return PartialView("_ModalFabricantes", fabricantes);
         }
     }
 }

@@ -19,12 +19,16 @@ namespace AutoDealerManager.MVC.ViewModels
 
         [Required(ErrorMessage = "O CPF é obrigatório.")]
         [StringLength(11, MinimumLength = 11, ErrorMessage = "O CPF deve conter exatamente 11 caracteres.")]
-        [RegularExpression(@"^\d{11}$", ErrorMessage = "CPF inválido. O CPF deve conter apenas números.")]
         public string CPF { get; set; }
 
         [Required(ErrorMessage = "O telefone é obrigatório.")]
         [StringLength(15, ErrorMessage = "O telefone deve ter no máximo 15 caracteres.")]
         [Phone(ErrorMessage = "Telefone inválido.")]
         public string Telefone { get; set; }
+
+        public override string ToString()
+        {
+            return $"Nome: {Nome}, CPF:{CPF}, Cel:{Telefone}";
+        }
     }
 }

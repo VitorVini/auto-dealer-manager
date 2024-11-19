@@ -7,11 +7,11 @@ namespace AutoDealerManager.Domain.Entities.Validations
     {
         public VendaValidation()
         {
-            RuleFor(v => v.DataVenda)
+            RuleFor(v => v.Data)
                 .LessThanOrEqualTo(DateTime.Now)
                 .WithMessage("A data da venda não pode ser uma data futura.");
 
-            RuleFor(v => v.PrecoVenda)
+            RuleFor(v => v.Preco)
                 .GreaterThan(0)
                 .WithMessage("O preço da venda deve ser maior que zero.");
 
@@ -26,12 +26,6 @@ namespace AutoDealerManager.Domain.Entities.Validations
             RuleFor(v => v.ConcessionariaId)
                 .NotEmpty()
                 .WithMessage("A concessionária deve ser especificada para a venda.");
-
-            RuleFor(v => v.Protocolo)
-                .NotEmpty()
-                .WithMessage("O protocolo da venda é obrigatório.")
-                .Length(36)
-                .WithMessage("O protocolo deve ter 36 caracteres.");
         }
     }
 }

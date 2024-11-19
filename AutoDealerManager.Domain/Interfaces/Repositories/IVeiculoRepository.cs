@@ -9,9 +9,10 @@ namespace AutoDealerManager.Domain.Interfaces.Repositories
 {
     public interface IVeiculoRepository : IRepository<Veiculo>
     {
+        Task<IEnumerable<Veiculo>> ObterVeiculosComFabricantesAsync();
         Task<IEnumerable<Veiculo>> ObterPorModeloAsync(Guid fabricanteId, string modelo);
         Task<IEnumerable<Veiculo>> ObterPorFabricanteAsync(Guid fabricanteId);
         Task<IEnumerable<Veiculo>> ObterPorTipoAsync(EnumVeiculo tipoVeiculo);
-        Task<bool> VeiculoExisteAsync(string modelo);
+        Task<bool> VeiculoExisteAsync(Guid fabricanteId, string modelo);
     }
 }

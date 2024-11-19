@@ -14,6 +14,6 @@ namespace AutoDealerManager.Domain.Entities
         public EnumVeiculo TipoVeiculo { get; set; }
         public string Descricao { get; set; }
         public virtual ICollection<Venda> Vendas { get; set; }
-        public virtual ICollection<Fabricante> Fabricantes { get; set; }
+        public virtual Fabricante Fabricante { get; set; }
     }
 }

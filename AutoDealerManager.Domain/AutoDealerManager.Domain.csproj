@@ -36,7 +36,6 @@
     <Compile Include="Core\Validations\ValidacaoCPF.cs" />
     <Compile Include="Entities\Cliente.cs" />
     <Compile Include="Entities\Concessionaria.cs" />
-    <Compile Include="Entities\Endereco.cs" />
     <Compile Include="Entities\Fabricante.cs" />
     <Compile Include="Entities\Services\ClienteService.cs" />
     <Compile Include="Entities\Services\ConcessionariaService.cs" />
@@ -46,7 +45,6 @@
     <Compile Include="Entities\Usuario.cs" />
     <Compile Include="Entities\Validations\ClienteValidation.cs" />
     <Compile Include="Entities\Validations\ConcessionariaValidation.cs" />
-    <Compile Include="Entities\Validations\EnderecoValidation.cs" />
     <Compile Include="Entities\Validations\FabricanteValidation.cs" />
     <Compile Include="Entities\Validations\VeiculoValidation.cs" />
     <Compile Include="Entities\Validations\VendaValidation.cs" />
@@ -57,7 +55,6 @@
     <Compile Include="Core\Interfaces\IRepository.cs" />
     <Compile Include="Interfaces\Repositories\IClienteRepository.cs" />
     <Compile Include="Interfaces\Repositories\IConcessionariaRepository.cs" />
-    <Compile Include="Interfaces\Repositories\IEnderecoRepository.cs" />
     <Compile Include="Interfaces\Repositories\IFabricanteRepository.cs" />
     <Compile Include="Interfaces\Repositories\IUsuarioRepository.cs" />
     <Compile Include="Interfaces\Repositories\IVeiculoRepository.cs" />

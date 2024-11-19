@@ -67,6 +67,7 @@
     <Compile Include="Validations\AnoValidoUtils.cs" />
     <Compile Include="Validations\PrecoValidoUtils.cs" />
     <Compile Include="Validations\ValidationUtils.cs" />
+    <Compile Include="Validations\WebsiteValidoUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -10,5 +10,6 @@ namespace AutoDealerManager.Domain.Interfaces.Repositories
         Task<bool> NomeExisteAsync(string nome);
         Task<bool> CpfExisteAsync(string cpf);
         Task<bool> ClienteExisteAsync(Guid id);
+        Task<Cliente> ObterPorCpfAsync(string cpf);
     }
 }

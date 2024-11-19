@@ -1,0 +1,31 @@
+@model AutoDealerManager.MVC.ViewModels.ConcessionariaVM
+
+<div class="form-group">
+    @Html.LabelFor(m => m.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.TextBoxFor(m => m.CEP, new { @class = "form-control", maxlength = 10 })
+    @Html.ValidationMessageFor(m => m.CEP, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Rua, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", maxlength = 255 })
+    @Html.ValidationMessageFor(m => m.Rua, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Numero, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.TextBoxFor(m => m.Numero, new { @class = "form-control", type = "number" })
+    @Html.ValidationMessageFor(m => m.Numero, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.TextBoxFor(m => m.Cidade, new { @class = "form-control", maxlength = 50 })
+    @Html.ValidationMessageFor(m => m.Cidade, "", new { @class = "text-danger" })
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(m => m.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
+    @Html.TextBoxFor(m => m.Estado, new { @class = "form-control", maxlength = 50 })
+    @Html.ValidationMessageFor(m => m.Estado, "", new { @class = "text-danger" })
+</div>

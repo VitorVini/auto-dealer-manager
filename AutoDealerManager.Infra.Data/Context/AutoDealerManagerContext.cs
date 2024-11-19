@@ -18,7 +18,6 @@ namespace AutoDealerManager.Infra.Data.Context
         public DbSet<Fabricante> Fabricantes { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Concessionaria> Concessionarias { get; set; }
-        public DbSet<Endereco> Enderecos { get; set; }
         public DbSet<Venda> Vendas { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -35,7 +34,6 @@ namespace AutoDealerManager.Infra.Data.Context
             modelBuilder.Configurations.Add(new FabricanteConfig());
             modelBuilder.Configurations.Add(new ClienteConfig());
             modelBuilder.Configurations.Add(new ConcessionariaConfig());
-            modelBuilder.Configurations.Add(new EnderecoConfig());
             modelBuilder.Configurations.Add(new VendaConfig());
 
             base.OnModelCreating(modelBuilder);

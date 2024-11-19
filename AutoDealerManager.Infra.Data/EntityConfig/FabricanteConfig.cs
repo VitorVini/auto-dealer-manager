@@ -27,13 +27,7 @@ namespace AutoDealerManager.Infra.Data.EntityConfig
                 .HasMaxLength(255);
 
             HasMany(f => f.Veiculos)
-                .WithMany(v => v.Fabricantes)
-                .Map(m =>
-                {
-                    m.ToTable("FabricanteVeiculo");
-                    m.MapLeftKey("FabricanteID");
-                    m.MapRightKey("VeiculoID");
-                });
+                .WithRequired(v => v.Fabricante);
 
             ToTable("Fabricantes");
         }

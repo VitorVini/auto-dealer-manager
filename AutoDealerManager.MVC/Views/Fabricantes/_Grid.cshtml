@@ -1,0 +1,28 @@
+﻿@model IEnumerable<AutoDealerManager.MVC.ViewModels.FabricanteVM>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.PaisOrigem)</th>
+            <th>@Html.DisplayNameFor(model => model.AnoFundacao)</th>
+            <th>@Html.DisplayNameFor(model => model.Website)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fabricante in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => fabricante.Nome)</td>
+                <td>@Html.DisplayFor(modelItem => fabricante.PaisOrigem)</td>
+                <td>@Html.DisplayFor(modelItem => fabricante.AnoFundacao)</td>
+                <td>@Html.DisplayFor(modelItem => fabricante.Website)</td>
+                <td style="width:160px">
+                    <a class="btn btn-warning" href="@Url.Action("Edit", "Fabricantes", new { id = fabricante.Id })">Editar</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Fabricantes", new { id = fabricante.Id })">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -9,17 +9,15 @@ namespace AutoDealerManager.Infra.Data.EntityConfig
         {
             HasKey(v => v.Id);
 
-            Property(v => v.DataVenda)
+            Property(v => v.Data)
                 .IsRequired();
 
-            Property(v => v.PrecoVenda)
+            Property(v => v.Preco)
                 .HasPrecision(10, 2)
                 .IsRequired();
 
             Property(v => v.Protocolo)
-                .IsRequired()
-                .HasColumnName("ProtocoloVenda")
-                .HasMaxLength(20);
+                .IsRequired();
 
             HasRequired(v => v.Veiculo)
                 .WithMany(veiculo => veiculo.Vendas)

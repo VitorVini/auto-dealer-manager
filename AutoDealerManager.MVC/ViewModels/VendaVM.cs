@@ -14,31 +14,34 @@ namespace AutoDealerManager.MVC.ViewModels
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O veículo é obrigatório.")]
-        public int VeiculoId { get; set; }
+        public Guid VeiculoId { get; set; }
 
         [Required(ErrorMessage = "A concessionária é obrigatória.")]
-        public int ConcessionariaId { get; set; }
+        public Guid ConcessionariaId { get; set; }
 
         [Required(ErrorMessage = "O cliente é obrigatório.")]
-        public int ClienteId { get; set; }
+        public Guid ClienteId { get; set; }
 
         [Required(ErrorMessage = "A data da venda é obrigatória.")]
         [DataType(DataType.DateTime, ErrorMessage = "Data inválida.")]
-        [Display(Name = "Data da Venda")]
-        public DateTime DataVenda { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime Data { get; set; }
 
         [Required(ErrorMessage = "O preço de venda é obrigatório.")]
+        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = false)]
         [Range(0, double.MaxValue, ErrorMessage = "O preço deve ser um valor positivo.")]
-        [Display(Name = "Preço da Venda")]
-        public decimal PrecoVenda { get; set; }
+        [Display(Name = "Preço")]
+        public decimal Preco { get; set; }
+        public long Protocolo { get; set; }
+        public string NomeVeiculo { get; set; }
 
-        [Required(ErrorMessage = "O protocolo de venda é obrigatório.")]
-        [StringLength(20, ErrorMessage = "O protocolo deve ter no máximo 20 caracteres.")]
-        public string ProtocoloVenda { get; set; }
+        [Display(Name = "Concessionaria")]
+        public string NomeConcessionaria { get; set; }
 
         // Relacionamentos
         public VeiculoVM Veiculo { get; set; }
         public ConcessionariaVM Concessionaria { get; set; }
+        [Display(Name = "Informações do Cliente")]
         public ClienteVM Cliente { get; set; }
     }
 }
