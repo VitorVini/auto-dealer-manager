@@ -3,7 +3,6 @@ using AutoDealerManager.Domain.Core.Services;
 using AutoDealerManager.Domain.Entities.Validations;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
-using System;
 using System.Threading.Tasks;
 
 namespace AutoDealerManager.Domain.Entities.Services
@@ -31,17 +30,13 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         private async Task ValidarDadosVeiculoAsync(Veiculo veiculo)
         {
-            if (!ExecutarValidacao(new VeiculoValidation(), veiculo))
-                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
+            ExecutarValidacaoValidator(new VeiculoValidation(), veiculo);
 
-            if (!AnoValidoUtils.ValidarAno(veiculo.AnoFabricacao))
-                throw new Exception("Ano inválido.");
+            ExecutarValidacao(AnoValidoUtils.ValidarAno(veiculo.AnoFabricacao), "Ano inválido.");
+            ExecutarValidacao(await _fabricanteRepository.FabricanteExisteAsync(veiculo.FabricanteId), "Fabricante não vinculado.");
+            ExecutarValidacao(!await _veiculoRepository.VeiculoExisteAsync(veiculo.Id, veiculo.Modelo), "Este veículo já foi cadastrado.");
 
-            if (!await _fabricanteRepository.FabricanteExisteAsync(veiculo.FabricanteId))
-                throw new Exception("Fabricante não vinculado.");
-
-            if (await _veiculoRepository.VeiculoExisteAsync(veiculo.Id, veiculo.Modelo))
-                throw new Exception("Este veículo já foi cadastrado.");
+            VerificarErros();
         }
 
         public async Task Remover(Veiculo veiculo)

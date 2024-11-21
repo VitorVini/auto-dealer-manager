@@ -36,7 +36,7 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         private async Task ValidarDadosCliente(Cliente cliente)
         {
-            if (!ExecutarValidacao(new ClienteValidation(), cliente))
+            if (!ExecutarValidacaoValidator(new ClienteValidation(), cliente))
                 throw new Exception($"Erro de validação: {string.Join(",", errors)}");
 
             if (await _clienteRepository.ClienteExisteAsync(cliente.Id))

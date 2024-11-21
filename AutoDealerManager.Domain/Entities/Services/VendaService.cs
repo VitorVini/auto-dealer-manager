@@ -59,10 +59,10 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         private async Task ValidarDadosVendaAsync(Venda venda)
         {
-            if (!ExecutarValidacao(new VendaValidation(), venda))
+            if (!ExecutarValidacaoValidator(new VendaValidation(), venda))
                 throw new Exception($"Erro de validação: {string.Join(",", errors)}");
 
-            if (!ExecutarValidacao(new ClienteValidation(), venda.Cliente))
+            if (!ExecutarValidacaoValidator(new ClienteValidation(), venda.Cliente))
                 throw new Exception($"Erro validação do cliente: {string.Join(",", errors)}");
 
             var veiculo = await _veiculoRepository.ObterPorIdAsync(venda.VeiculoId);

@@ -30,7 +30,7 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         private async Task ValidarDadosFabricanteAsync(Fabricante fabricante)
         {
-            if (!ExecutarValidacao(new FabricanteValidation(), fabricante))
+            if (!ExecutarValidacaoValidator(new FabricanteValidation(), fabricante))
                 throw new Exception($"Erro de validação: {string.Join(",", errors)}");
 
             if (await _fabricanteRepository.NomeExisteAsync(fabricante.Id, fabricante.Nome))

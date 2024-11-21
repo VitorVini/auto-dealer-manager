@@ -34,7 +34,7 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         private async Task ValidarDadosConcessionariaAsync(Concessionaria concessionaria)
         {
-            if (!ExecutarValidacao(new ConcessionariaValidation(), concessionaria))
+            if (!ExecutarValidacaoValidator(new ConcessionariaValidation(), concessionaria))
                 throw new Exception($"Erro de validação: {string.Join(",", errors)}");
 
             if (await _concessionariaRepository.ConcessionariaExisteAsync(concessionaria.Id, concessionaria.Nome))
