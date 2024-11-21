@@ -124,9 +124,9 @@ function inicializarDataTable(tableId) {
             },
             "columnDefs": [
             {
-                "targets": -1,  // Última coluna
-                "orderable": false,  // Impede a ordenação
-                "searchable": false,  // Impede o filtro
+                "targets": -1,  
+                "orderable": false,  
+                "searchable": false,  
                 "width": "60px"
                 }
             ]

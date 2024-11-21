@@ -35,6 +35,7 @@ namespace AutoDealerManager.MVC.Controllers
         [HttpGet]
         public async Task<ActionResult> Index()
         {
+            // TO DO: TRATAR EXCEPTION
             await CarregarViewbagsAsync();
             var veiculos = _mapper.Map<IEnumerable<VeiculoVM>>(await _veiculoRepository.ObterVeiculosComFabricantesAsync());
             return View(veiculos);

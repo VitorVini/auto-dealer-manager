@@ -1,6 +1,6 @@
 @model AutoDealerManager.MVC.ViewModels.ConcessionariaVM
 @{
-    ViewBag.Title = "Adicionar Nova Concessionaria";
+    ViewBag.Title = "Informações da nova concessionária";
     bool isUpdate = Model?.IsUpdate != null;
 }
 
@@ -44,7 +44,7 @@
         </div>
 
         @Html.Partial("_FormEndereco")
-
+        <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-3">
                 <input type="submit" value="@(isUpdate ? "Salvar" : "Cadastrar")" class="btn btn-primary" />

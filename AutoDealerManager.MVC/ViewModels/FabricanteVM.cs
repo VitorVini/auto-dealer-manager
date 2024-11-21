@@ -30,6 +30,7 @@ namespace AutoDealerManager.MVC.ViewModels
         public int AnoFundacao { get; set; }
 
         [Url(ErrorMessage = "O campo Website deve ser uma URL válida")]
+        [Required(ErrorMessage = "O campo WebSite é obrigatório")]
         [StringLength(255, ErrorMessage = "O Website deve ter no máximo 255 caracteres")]
         public string Website { get; set; }
 

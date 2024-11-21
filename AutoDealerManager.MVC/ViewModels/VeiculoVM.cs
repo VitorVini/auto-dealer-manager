@@ -24,7 +24,7 @@ namespace AutoDealerManager.MVC.ViewModels
         public int AnoFabricacao { get; set; }
 
         [Required(ErrorMessage = "O preço é obrigatório.")]
-        [Range(0, 10000000, ErrorMessage = "O preço deve ser positivo e realista.")]
+        [Range(1, 1000000000, ErrorMessage = "O preço deve ser positivo e realista.")]
         [DataType(DataType.Currency)]
         [DisplayName("Preço")]
         public decimal Preco { get; set; }

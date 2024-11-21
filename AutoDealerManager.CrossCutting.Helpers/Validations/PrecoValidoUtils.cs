@@ -4,7 +4,7 @@
     {
         public static bool ValidarPreco(decimal preco)
         {
-            return preco >= 0;
+            return preco > 0;
         }
     }
 }

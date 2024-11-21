@@ -1,6 +1,6 @@
 @model AutoDealerManager.MVC.ViewModels.VeiculoVM
 @{
-    ViewBag.Title = "Adicionar Novo Veiculo";
+    ViewBag.Title = "Informações do novo Veiculo";
     bool isUpdate = Model?.IsUpdate != null;
 }
 
@@ -54,7 +54,7 @@
             @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control", type = "string" })
             @Html.ValidationMessageFor(m => m.Descricao, "", new { @class = "text-danger" })
         </div>
-
+        <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-3">
                 <input type="submit" value="@(isUpdate ? "Salvar" : "Cadastrar")" class="btn btn-primary" />

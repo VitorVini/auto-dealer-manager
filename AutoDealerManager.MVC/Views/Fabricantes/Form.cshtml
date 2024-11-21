@@ -1,6 +1,6 @@
 ﻿@model AutoDealerManager.MVC.ViewModels.FabricanteVM
 @{
-    ViewBag.Title = "Adicionar Novo Fabricante";
+    ViewBag.Title = "Informações do novo Fabricante";
     bool isUpdate = Model?.IsUpdate != null;
 }
 
@@ -41,7 +41,7 @@
             @Html.TextBoxFor(m => m.Website, new { @class = "form-control", type = "url" })
             @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
         </div>
-
+        <br />
         <div class="form-group">
             <div class="col-md-offset-2 col-md-3">
                 <input type="submit" value="@(isUpdate ? "Salvar" : "Cadastrar")" class="btn btn-primary" />
