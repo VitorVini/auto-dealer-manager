@@ -95,6 +95,10 @@
       <Project>{265a951d-587a-4218-866d-ffee564fb9e8}</Project>
       <Name>AutoDealerManager.Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\AutoDealerManager.Infra.CrossCutting.Identity\AutoDealerManager.Infra.CrossCutting.Identity.csproj">
+      <Project>{59c955d1-55c1-486e-92e4-52397d4c6bd2}</Project>
+      <Name>AutoDealerManager.Infra.CrossCutting.Identity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AutoDealerManager.Infra.Data\AutoDealerManager.Infra.Data.csproj">
       <Project>{238EA6CA-B4C9-46D7-8494-CCDDC56B0205}</Project>
       <Name>AutoDealerManager.Infra.Data</Name>

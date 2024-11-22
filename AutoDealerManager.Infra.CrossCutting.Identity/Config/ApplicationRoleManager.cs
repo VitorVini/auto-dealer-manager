@@ -18,7 +18,7 @@ namespace AutoDealerManager.Infra.CrossCutting.Identity.Config
 
         public static ApplicationRoleManager Create(IdentityFactoryOptions<ApplicationRoleManager> options, IOwinContext context)
         {
-            var roleManager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<ApplicationDbContext>()));
+            var roleManager = new ApplicationRoleManager(new RoleStore<IdentityRole>(context.Get<Context.AutoDealerIdentityDbContext>()));
             foreach (EnumNivelAcesso nivel in Enum.GetValues(typeof(EnumNivelAcesso)))
             {
                 var roleName = nivel.ToString();

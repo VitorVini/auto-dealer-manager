@@ -14,6 +14,7 @@ using System.Web.Routing;
 
 namespace AutoDealerManager.MVC.Controllers
 {
+    [Authorize]
     public class VeiculosController : Controller
     {
         private readonly IVeiculoService _veiculoService;

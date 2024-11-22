@@ -13,6 +13,7 @@ using System.Web.Routing;
 
 namespace AutoDealerManager.MVC.Controllers
 {
+    [Authorize]
     public class VendasController : Controller
     {
         private readonly IVendaService _vendaService;

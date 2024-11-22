@@ -12,6 +12,7 @@ using System.Web.Routing;
 
 namespace AutoDealerManager.MVC.Controllers
 {
+    [Authorize]
     public class FabricantesController : Controller
     {
         private readonly IFabricanteService _fabricanteService;
