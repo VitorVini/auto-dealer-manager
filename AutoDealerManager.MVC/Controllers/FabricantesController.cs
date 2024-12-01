@@ -1,7 +1,9 @@
 ﻿using AutoDealerManager.CrossCutting.Helpers.Validations;
 using AutoDealerManager.Domain.Entities;
+using AutoDealerManager.Domain.Enum;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
+using AutoDealerManager.MVC.Attributes;
 using AutoDealerManager.MVC.ViewModels;
 using AutoMapper;
 using System;
@@ -36,7 +38,7 @@ namespace AutoDealerManager.MVC.Controllers
         }
 
         [Route("novo-fabricante")]
-
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         public ActionResult Create()
         {
             return View("Form", new FabricanteVM());
@@ -45,6 +47,7 @@ namespace AutoDealerManager.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("novo-fabricante")]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         public async Task<ActionResult> Salvar(FabricanteVM fabricanteVM)
         {
             try
@@ -71,7 +74,7 @@ namespace AutoDealerManager.MVC.Controllers
             }
 
         }
-
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         public async Task<ActionResult> Edit(Guid id)
         {
             var fabricanteVM = _mapper.Map<FabricanteVM>(await _fabricanteRepository.ObterPorIdAsync(id));
@@ -87,6 +90,7 @@ namespace AutoDealerManager.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         public async Task<ActionResult> Edit(Guid id, FabricanteVM fabricanteVM)
         {
             if (!ModelState.IsValid) return View(fabricanteVM);
@@ -101,6 +105,7 @@ namespace AutoDealerManager.MVC.Controllers
         }
 
         [HttpGet, ActionName("Delete")]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
             var fabricante = await _fabricanteRepository.ObterPorIdAsync(id);

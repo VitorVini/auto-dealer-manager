@@ -10,6 +10,17 @@
     @Html.AntiForgeryToken()
     <h4>Preencha os dados.</h4>
     <hr />
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.NivelAcesso, new { @class = "control-label" })
+        @Html.DropDownListFor(
+            m => m.NivelAcesso,
+            new SelectList(Enum.GetValues(typeof(AutoDealerManager.Domain.Enum.EnumNivelAcesso))),
+            new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.NivelAcesso, "", new { @class = "text-danger" })
+    </div>
+
+
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
@@ -28,10 +39,10 @@
         <div class="col-md-10">
             @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
         </div>
-    </div>
+    </div> <br />
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Registrar" />
+            <input type="submit" class="btn btn-dark" value="Registrar" />
         </div>
     </div>
 }

@@ -1,0 +1,117 @@
+﻿@{
+    ViewBag.Title = "Relatório Mensal de Vendas";
+}
+
+<div class="container" mt-4>
+    <div class="text-center mb-4">
+        <h2>@ViewBag.Title</h2>
+        <p class="text-muted">Visualize os dados de vendas mensais com gráficos interativos</p>
+    </div>
+
+    <div class="container mb-4">
+        <div class="card shadow-sm">
+            <div class="card-header text-center bg-primary text-white">
+                <h5>Gerar Relatório Mensal</h5>
+            </div>
+            <div class="card-body">
+                <form class="text-center">
+                    <div class="row justify-content-center mb-3">
+                        <!-- Campo Mês -->
+                        <div class="col-md-4">
+                            <label for="mes" class="form-label">Mês:</label>
+                            <select id="mes" class="form-control">
+                                @for (int i = 1; i <= 12; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
+                        <!-- Campo Ano -->
+                        <div class="col-md-4">
+                            <label for="ano" class="form-label">Ano:</label>
+                            <select id="ano" class="form-control">
+                                @for (int i = DateTime.Now.Year - 5; i <= DateTime.Now.Year; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Botão Gerar Relatório -->
+                    <div>
+                        <button id="btnGerarRelatorio" type="button" class="btn btn-primary">Gerar relatório</button>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer d-flex justify-content-between">
+                <!-- Botões de Exportação -->
+                <a id="exportarPDF" class="btn btn-danger" href="#">Exportar para PDF</a>
+                <a id="exportarExcel" class="btn btn-success" href="#">Exportar para Excel</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card text-white bg-primary">
+                <div class="card-body text-center">
+                    <h4 id="receitaTotal" class="card-title">Receita Total: R$ 0,00</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header text-center">
+                    Vendas por Tipo de Veículo
+                </div>
+                <div class="card-body">
+                    <canvas id="graficoVendasTipoVeiculo"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header text-center">
+                    Vendas por Fabricante
+                </div>
+                <div class="card-body d-flex justify-content-center align-items-center" style="height: 330px;">
+                    <div style="max-width: 330px; width: 100%; height: 100%;">
+                        <canvas id="graficoVendasFabricante"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12 mb-4">
+            <div class="card">
+                <div class="card-header text-center">
+                    Vendas por Concessionária
+                </div>
+                <div class="card-body">
+                    <canvas id="graficoVendasConcessionaria"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="~/Scripts/Chart.min.js"></script>
+<script src="~/Scripts/relatorios.js"></script>
+<script>
+    document.getElementById("exportarPDF").addEventListener("click", function () {
+        const mes = document.getElementById("mes").value;
+        const ano = document.getElementById("ano").value;
+        window.location.href = `/Relatorios/ExportarParaPDF?mes=${mes}&ano=${ano}`;
+    });
+</script>
+<script>
+    document.getElementById("exportarExcel").addEventListener("click", function () {
+        const mes = document.getElementById("mes").value;
+        const ano = document.getElementById("ano").value;
+        window.location.href = `/Relatorios/ExportarParaExcel?mes=${mes}&ano=${ano}`;
+    });
+</script>

@@ -3,7 +3,6 @@ using AutoDealerManager.Domain.Core.Services;
 using AutoDealerManager.Domain.Entities.Validations;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
-using System;
 using System.Threading.Tasks;
 
 namespace AutoDealerManager.Domain.Entities.Services
@@ -30,17 +29,13 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         private async Task ValidarDadosFabricanteAsync(Fabricante fabricante)
         {
-            if (!ExecutarValidacaoValidator(new FabricanteValidation(), fabricante))
-                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
+            ExecutarValidacaoValidator(new FabricanteValidation(), fabricante);
 
-            if (await _fabricanteRepository.NomeExisteAsync(fabricante.Id, fabricante.Nome))
-                throw new Exception("Já existe um fabricante cadastrado com esse nome.");
+            ExecutarValidacao(!await _fabricanteRepository.NomeExisteAsync(fabricante.Id, fabricante.Nome), "Fabricante já cadastrado.");
+            ExecutarValidacao(WebsiteAcessivel(fabricante.Website), "Website inválido.");
+            ExecutarValidacao(AnoValidoUtils.ValidarAno(fabricante.AnoFundacao), "Ano inválido, deve representar uma data no presente ou passado.");
 
-            if (!WebsiteAcessivel(fabricante.Website))
-                throw new Exception("Website não está acessível, favor verificar.");
-
-            if (!AnoValidoUtils.ValidarAno(fabricante.AnoFundacao))
-                throw new Exception("Ano inválido.");
+            VerificarErros();
         }
 
         public async Task Remover(Fabricante fabricante)

@@ -28,12 +28,6 @@ namespace AutoDealerManager.Infra.Data.Repositories
             return await DbSet.AsNoTracking().FirstOrDefaultAsync(v => v.Protocolo == protocolo && v.Ativo);
         }
 
-        public async Task<bool> VerificarPrecoValidoAsync(Guid veiculoId, decimal precoVenda)
-        {
-            var veiculo = await Db.Veiculos.AsNoTracking().FirstOrDefaultAsync(v => v.Id == veiculoId && v.Ativo);
-            return veiculo != null && precoVenda <= veiculo.Preco;
-        }
-
         public override async Task<IEnumerable<Venda>> ObterTodosAsync()
         {
             return await DbSet
@@ -43,6 +37,44 @@ namespace AutoDealerManager.Infra.Data.Repositories
                 .Include(v => v.Concessionaria)
                 .AsNoTracking()
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Venda>> ObterVendasPorMesAno(int mes, int ano)
+        {
+            return await DbSet
+                .Where(v => v.Ativo)
+                .Include(v => v.Veiculo)
+                .Include(v => v.Veiculo.Fabricante)
+                .Include(v => v.Concessionaria)
+                .Where(v => v.Data.Month == mes && v.Data.Year == ano)
+                .ToListAsync();
+        }
+
+        public async Task<Dictionary<string, decimal>> ObterVendasPorTipoDeVeiculoAsync(int mes, int ano)
+        {
+            return await Db.Vendas
+                .Where(v => v.Ativo && v.Data.Month == mes && v.Data.Year == ano)
+                .GroupBy(v => v.Veiculo.TipoVeiculo)
+                .Select(g => new { Tipo = g.Key.ToString(), Total = g.Sum(v => v.Preco) })
+                .ToDictionaryAsync(g => g.Tipo, g => g.Total);
+        }
+
+        public async Task<Dictionary<string, decimal>> ObterVendasPorFabricanteAsync(int mes, int ano)
+        {
+            return await Db.Vendas
+                .Where(v => v.Ativo && v.Data.Month == mes && v.Data.Year == ano)
+                .GroupBy(v => v.Veiculo.Fabricante.Nome)
+                .Select(g => new { Fabricante = g.Key, Total = g.Sum(v => v.Preco) })
+                .ToDictionaryAsync(g => g.Fabricante, g => g.Total);
+        }
+
+        public async Task<Dictionary<string, decimal>> ObterVendasPorConcessionariaAsync(int mes, int ano)
+        {
+            return await Db.Vendas
+                .Where(v => v.Ativo && v.Data.Month == mes && v.Data.Year == ano)
+                .GroupBy(v => v.Concessionaria.Nome)
+                .Select(g => new { Concessionaria = g.Key, Total = g.Sum(v => v.Preco) })
+                .ToDictionaryAsync(g => g.Concessionaria, g => g.Total);
         }
     }
 }

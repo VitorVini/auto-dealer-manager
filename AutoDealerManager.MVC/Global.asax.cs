@@ -1,7 +1,11 @@
-﻿using AutoDealerManager.Infra.CrossCutting.IoC;
+﻿using AutoDealerManager.Domain.Enum;
+using AutoDealerManager.Infra.CrossCutting.IoC;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin;
 using SimpleInjector;
 using SimpleInjector.Integration.Web.Mvc;
+using System;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -36,10 +40,28 @@ namespace AutoDealerManager.MVC
 
             container.Verify();
 
+            SeedRoles(container);
+
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+        private void SeedRoles(Container container)
+        {
+            using (var scope = SimpleInjector.Lifestyles.AsyncScopedLifestyle.BeginScope(container))
+            {
+                var roleManager = container.GetInstance<RoleManager<IdentityRole>>();
+
+                foreach (var role in Enum.GetValues(typeof(EnumNivelAcesso)))
+                {
+                    var roleName = role.ToString();
+                    if (!roleManager.RoleExists(roleName))
+                    {
+                        roleManager.Create(new IdentityRole(roleName));
+                    }
+                }
+            }
         }
     }
 }

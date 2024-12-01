@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AutoDealerManager.Infra.CrossCutting.Identity.Models
+namespace AutoDealerManager.Infra.CrossCutting.Identity.ViewModels
 {
     public class AddPhoneNumberViewModel
     {

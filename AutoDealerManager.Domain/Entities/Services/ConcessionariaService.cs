@@ -2,7 +2,6 @@
 using AutoDealerManager.Domain.Entities.Validations;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
-using System;
 using System.Threading.Tasks;
 
 namespace AutoDealerManager.Domain.Entities.Services
@@ -34,11 +33,11 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         private async Task ValidarDadosConcessionariaAsync(Concessionaria concessionaria)
         {
-            if (!ExecutarValidacaoValidator(new ConcessionariaValidation(), concessionaria))
-                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
+            ExecutarValidacaoValidator(new ConcessionariaValidation(), concessionaria);
 
-            if (await _concessionariaRepository.ConcessionariaExisteAsync(concessionaria.Id, concessionaria.Nome))
-                throw new Exception("Esta concessionária já foi cadastrada.");
+            ExecutarValidacao(!await _concessionariaRepository.ConcessionariaExisteAsync(concessionaria.Id, concessionaria.Nome), "Esta concessionária já foi cadastrada.");
+
+            VerificarErros();
         }
 
         public void Dispose()

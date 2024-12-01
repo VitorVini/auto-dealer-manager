@@ -1,7 +1,9 @@
 using AutoDealerManager.CrossCutting.Helpers.Validations;
 using AutoDealerManager.Domain.Entities;
+using AutoDealerManager.Domain.Enum;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
+using AutoDealerManager.MVC.Attributes;
 using AutoDealerManager.MVC.ViewModels;
 using AutoMapper;
 using System;
@@ -36,12 +38,13 @@ namespace AutoDealerManager.MVC.Controllers
         }
 
         [Route("nova-concessionaria")]
-
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         public ActionResult Create()
         {
             return View("Form", new ConcessionariaVM());
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("nova-concessionaria")]
@@ -72,6 +75,7 @@ namespace AutoDealerManager.MVC.Controllers
 
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         public async Task<ActionResult> Edit(Guid id)
         {
             var concessionariaVM = _mapper.Map<ConcessionariaVM>(await _concessionariaRepository.ObterPorIdAsync(id));
@@ -85,6 +89,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", concessionariaVM);
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Guid id, ConcessionariaVM concessionariaVM)
@@ -100,6 +105,7 @@ namespace AutoDealerManager.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {

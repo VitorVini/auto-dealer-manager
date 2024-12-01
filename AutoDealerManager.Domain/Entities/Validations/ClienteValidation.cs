@@ -8,7 +8,7 @@ namespace AutoDealerManager.Domain.Entities.Validations
         public ClienteValidation()
         {
             RuleFor(c => c.Nome)
-           .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
+           .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido.")
            .Length(1, 100).WithMessage("O nome deve ter no máximo 100 caracteres.");
 
             RuleFor(c => c.CPF.Length).Equal(CpfValidacao.TamanhoCpf)
@@ -18,7 +18,7 @@ namespace AutoDealerManager.Domain.Entities.Validations
                 .WithMessage("O documento fornecido é inválido.");
 
             RuleFor(c => c.Telefone)
-                .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
+                .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido.")
                 .Matches(@"^\(\d{2}\)\s\d{4,5}-\d{4}$").WithMessage("O campo {PropertyName} deve estar no formato (XX) XXXXX-XXXX.");
         }
     }

@@ -3,6 +3,7 @@ using AutoDealerManager.Domain.Entities.Validations;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AutoDealerManager.Domain.Entities.Services
@@ -28,12 +29,7 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         public async Task Adicionar(Venda venda)
         {
-            var cliente = await _clienteRepository.ObterPorCpfAsync(venda.Cliente.CPF);
-            if (cliente != null)
-                venda.Cliente.Id = cliente.Id;
-            else
-                venda.Cliente.Id = Guid.NewGuid();
-            venda.ClienteId = venda.Cliente.Id;
+            await TratarCliente(venda);
 
             await ValidarDadosVendaAsync(venda);
 
@@ -59,24 +55,39 @@ namespace AutoDealerManager.Domain.Entities.Services
 
         private async Task ValidarDadosVendaAsync(Venda venda)
         {
-            if (!ExecutarValidacaoValidator(new VendaValidation(), venda))
-                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
-
-            if (!ExecutarValidacaoValidator(new ClienteValidation(), venda.Cliente))
-                throw new Exception($"Erro validação do cliente: {string.Join(",", errors)}");
-
             var veiculo = await _veiculoRepository.ObterPorIdAsync(venda.VeiculoId);
 
-            if (veiculo == null)
-                throw new Exception("Este veículo não existe ou não está disponível");
+            ExecutarValidacaoValidator(new VendaValidation(), venda);
+            ExecutarValidacaoValidator(new ClienteValidation(), venda.Cliente);
 
-            if (await _concessionariaRepository.ObterPorIdAsync(venda.ConcessionariaId) == null)
-                throw new Exception("Esta concessionária não existe ou não está disponível");
+            ExecutarValidacao(veiculo != null, "Este veículo não existe ou não está disponível.");
+            ExecutarValidacao(await _concessionariaRepository.ObterPorIdAsync(venda.ConcessionariaId) != null, "Esta concessionária não existe ou não está disponível");
+            ExecutarValidacao(venda.Preco >= veiculo.Preco, "Não é possível vender um veículo com um preço menor do que o cadastrado");
 
-            if (venda.Preco < veiculo.Preco)
-                throw new Exception("Não é possível vender um veículo com um preço menor do que o cadastrado");
+            VerificarErros();
         }
+        // TO DO: ASSOCIAR VENDAS PARA NÃO QUEBRAR QUANDO O CLIENTE FOR O MESMO
+        private async Task TratarCliente(Venda venda)
+        {
+            var cliente = await _clienteRepository.ObterPorCpfAsync(venda.Cliente.CPF);
 
+            if (cliente != null)
+            {
+                venda.Cliente = cliente;
+                venda.Cliente.Id = cliente.Id;
+
+                if (cliente.Vendas == null)
+                    cliente.Vendas = new List<Venda>();
+
+                cliente.Vendas.Add(venda);
+            }
+            else
+            {
+                venda.Cliente.Id = Guid.NewGuid();
+                venda.Cliente.Vendas = new List<Venda> { venda };
+            }
+            venda.ClienteId = venda.Cliente.Id;
+        }
         public void Dispose()
         {
             _vendaRepository?.Dispose();

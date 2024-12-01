@@ -7,8 +7,7 @@ namespace AutoDealerManager.CrossCutting.Helpers.Validations
     {
         public static string ObterErroValidacaoViewModel(ModelStateDictionary ModelState)
         {
-            
-            return string.Join(",", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList());
+            return string.Join("<br>", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage).ToList());
         }
     }
 }

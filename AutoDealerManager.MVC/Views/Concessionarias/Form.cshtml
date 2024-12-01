@@ -27,19 +27,19 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", type = "number" })
+            @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", placeholder = "(00) 0.0000-0000" })
             @Html.ValidationMessageFor(m => m.Telefone, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Email, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", placeholder = "email@example.com" })
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.CapacidadeMaximaVeiculos, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.CapacidadeMaximaVeiculos, new { @class = "form-control", type = "number" })
+            @Html.TextBoxFor(m => m.CapacidadeMaximaVeiculos, new { @class = "form-control" })
             @Html.ValidationMessageFor(m => m.CapacidadeMaximaVeiculos, "", new { @class = "text-danger" })
         </div>
 

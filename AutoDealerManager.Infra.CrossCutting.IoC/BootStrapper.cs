@@ -39,6 +39,7 @@ namespace AutoDealerManager.Infra.CrossCutting.IoC
             container.Register<IVeiculoService, VeiculoService>(Lifestyle.Scoped);
             container.Register<IVendaService, VendaService>(Lifestyle.Scoped);
             container.Register<IClienteService, ClienteService>(Lifestyle.Scoped);
+            container.Register<IRelatorioAppService, RelatorioAppService>(Lifestyle.Scoped);
 
             container.Register<IVendaApp, VendaApp>(Lifestyle.Scoped);
 
@@ -56,6 +57,7 @@ namespace AutoDealerManager.Infra.CrossCutting.IoC
             container.Register<ApplicationUserManager>(Lifestyle.Scoped);
             container.Register<ApplicationSignInManager>(Lifestyle.Scoped);
             container.Register<ApplicationRoleManager>(Lifestyle.Scoped);
+            container.Register<RoleManager<IdentityRole>>(Lifestyle.Scoped);
 
         }
     }

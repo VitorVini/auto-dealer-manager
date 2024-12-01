@@ -1,7 +1,9 @@
 using AutoDealerManager.CrossCutting.Helpers.Validations;
 using AutoDealerManager.Domain.Entities;
+using AutoDealerManager.Domain.Enum;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
+using AutoDealerManager.MVC.Attributes;
 using AutoDealerManager.MVC.ViewModels;
 using AutoMapper;
 using System;
@@ -40,12 +42,14 @@ namespace AutoDealerManager.MVC.Controllers
             return View(vendas);
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
         public async Task<ActionResult> RealizarVenda()
         {
             await CarregarViewbagsAsync();
             return View("Form", new VendaVM());
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RealizarVenda(VendaVM vendaVM)
@@ -79,6 +83,7 @@ namespace AutoDealerManager.MVC.Controllers
 
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
         public async Task<ActionResult> Edit(Guid id)
         {
             await CarregarViewbagsAsync();
@@ -92,6 +97,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", vendaVM);
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Guid id, VendaVM vendaVM)
@@ -107,6 +113,7 @@ namespace AutoDealerManager.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {

@@ -3,6 +3,7 @@ using AutoDealerManager.Domain.Entities;
 using AutoDealerManager.Domain.Enum;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
+using AutoDealerManager.MVC.Attributes;
 using AutoDealerManager.MVC.ViewModels;
 using AutoMapper;
 using System;
@@ -42,6 +43,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View(veiculos);
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
         [Route("novo-veiculo")]
         public async Task<ActionResult> Create()
         {
@@ -49,6 +51,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", new VeiculoVM());
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("novo-veiculo")]
@@ -86,6 +89,7 @@ namespace AutoDealerManager.MVC.Controllers
 
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
         public async Task<ActionResult> Edit(Guid id)
         {
             await CarregarViewbagsAsync();
@@ -100,6 +104,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", veiculoVM);
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Guid id, VeiculoVM veiculoVM)
@@ -115,6 +120,7 @@ namespace AutoDealerManager.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {

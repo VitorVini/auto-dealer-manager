@@ -2,7 +2,6 @@
 using AutoDealerManager.Domain.Entities.Validations;
 using AutoDealerManager.Domain.Interfaces.Repositories;
 using AutoDealerManager.Domain.Interfaces.Services;
-using System;
 using System.Threading.Tasks;
 
 namespace AutoDealerManager.Domain.Entities.Services
@@ -17,14 +16,14 @@ namespace AutoDealerManager.Domain.Entities.Services
         }
         public async Task Adicionar(Cliente cliente)
         {
-            await ValidarDadosCliente(cliente);
+            await ValidarDadosClienteAsync(cliente);
 
             await _clienteRepository.AdicionarAsync(cliente);
         }
 
         public async Task Atualizar(Cliente cliente)
         {
-            await ValidarDadosCliente(cliente);
+            await ValidarDadosClienteAsync(cliente);
 
             await _clienteRepository.AtualizarAsync(cliente);
         }
@@ -34,16 +33,13 @@ namespace AutoDealerManager.Domain.Entities.Services
             await _clienteRepository.RemoverAsync(cliente);
         }
 
-        private async Task ValidarDadosCliente(Cliente cliente)
+        private async Task ValidarDadosClienteAsync(Cliente cliente)
         {
-            if (!ExecutarValidacaoValidator(new ClienteValidation(), cliente))
-                throw new Exception($"Erro de validação: {string.Join(",", errors)}");
+            ExecutarValidacaoValidator(new ClienteValidation(), cliente);
 
-            if (await _clienteRepository.ClienteExisteAsync(cliente.Id))
-                throw new Exception("Este cliente já foi cadastrado.");
+            ExecutarValidacao(!await _clienteRepository.ClienteExisteAsync(cliente.Id, cliente.CPF), "Este cliente já foi cadastrado.");
 
-            if (await _clienteRepository.CpfExisteAsync(cliente.CPF))
-                throw new Exception("Um cliente com este cpf já foi cadastrado.");
+            VerificarErros();
         }
 
         public void Dispose()

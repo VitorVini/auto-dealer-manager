@@ -32,9 +32,9 @@ namespace AutoDealerManager.Domain.Entities.Services
         {
             ExecutarValidacaoValidator(new VeiculoValidation(), veiculo);
 
-            ExecutarValidacao(AnoValidoUtils.ValidarAno(veiculo.AnoFabricacao), "Ano inválido.");
-            ExecutarValidacao(await _fabricanteRepository.FabricanteExisteAsync(veiculo.FabricanteId), "Fabricante não vinculado.");
-            ExecutarValidacao(!await _veiculoRepository.VeiculoExisteAsync(veiculo.Id, veiculo.Modelo), "Este veículo já foi cadastrado.");
+            ExecutarValidacao(AnoValidoUtils.ValidarAno(veiculo.AnoFabricacao), "Ano inválido");
+            ExecutarValidacao(await _fabricanteRepository.FabricanteExisteAsync(veiculo.FabricanteId), "Fabricante não vinculado");
+            ExecutarValidacao(!await _veiculoRepository.VeiculoExisteAsync(veiculo.Id, veiculo.Modelo), "Este veículo já foi cadastrado");
 
             VerificarErros();
         }

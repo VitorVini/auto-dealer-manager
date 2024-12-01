@@ -33,7 +33,7 @@ namespace AutoDealerManager.Domain.Core.Services
         protected void VerificarErros()
         {
             if (errors.Any())
-                throw new Exception(string.Join("\n", errors));
+                throw new Exception(string.Join("<br>", errors));
         }
     }
 }

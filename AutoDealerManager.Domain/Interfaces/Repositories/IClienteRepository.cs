@@ -7,9 +7,7 @@ namespace AutoDealerManager.Domain.Interfaces.Repositories
 {
     public interface IClienteRepository : IRepository<Cliente>
     {
-        Task<bool> NomeExisteAsync(string nome);
-        Task<bool> CpfExisteAsync(string cpf);
-        Task<bool> ClienteExisteAsync(Guid id);
+        Task<bool> ClienteExisteAsync(Guid id, string cpf);
         Task<Cliente> ObterPorCpfAsync(string cpf);
     }
 }

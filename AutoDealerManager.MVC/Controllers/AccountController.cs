@@ -129,6 +129,7 @@ namespace AutoDealerManager.MVC.Controllers
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(user.Id, model.NivelAcesso.ToString());
                     await _signInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id);
