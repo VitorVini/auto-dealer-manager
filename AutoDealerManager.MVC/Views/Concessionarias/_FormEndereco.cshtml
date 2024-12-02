@@ -2,13 +2,13 @@
 
 <div class="form-group">
     @Html.LabelFor(m => m.CEP, htmlAttributes: new { @class = "control-label col-md-2" })
-    @Html.TextBoxFor(m => m.CEP, new { @class = "form-control", maxlength = 10 })
+    @Html.TextBoxFor(m => m.CEP, new { @class = "form-control", id = "CEP", maxlength = 9, placeholder = "00000-000" })
     @Html.ValidationMessageFor(m => m.CEP, "", new { @class = "text-danger" })
 </div>
 
 <div class="form-group">
     @Html.LabelFor(m => m.Rua, htmlAttributes: new { @class = "control-label col-md-2" })
-    @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", maxlength = 255 })
+    @Html.TextBoxFor(m => m.Rua, new { @class = "form-control", maxlength = 255, placeholder = "Rua Andorinhas" })
     @Html.ValidationMessageFor(m => m.Rua, "", new { @class = "text-danger" })
 </div>
 
@@ -20,12 +20,12 @@
 
 <div class="form-group">
     @Html.LabelFor(m => m.Cidade, htmlAttributes: new { @class = "control-label col-md-2" })
-    @Html.TextBoxFor(m => m.Cidade, new { @class = "form-control", maxlength = 50 })
+    @Html.TextBoxFor(m => m.Cidade, new { @class = "form-control", maxlength = 50, placeholder = "Parnamirim" })
     @Html.ValidationMessageFor(m => m.Cidade, "", new { @class = "text-danger" })
 </div>
 
 <div class="form-group">
     @Html.LabelFor(m => m.Estado, htmlAttributes: new { @class = "control-label col-md-2" })
-    @Html.TextBoxFor(m => m.Estado, new { @class = "form-control", maxlength = 50 })
+    @Html.TextBoxFor(m => m.Estado, new { @class = "form-control", maxlength = 50, placeholder = "RN" })
     @Html.ValidationMessageFor(m => m.Estado, "", new { @class = "text-danger" })
 </div>

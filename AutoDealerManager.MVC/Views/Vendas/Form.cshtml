@@ -5,7 +5,7 @@
 
 <h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm("RealizarVenda", "Vendas", FormMethod.Post))
+@using (Html.BeginForm("RealizarVenda", "Vendas", FormMethod.Post, new {id = "formVendas"}))
 {
     <div class="form-horizontal">
         @Html.AntiForgeryToken()
@@ -48,19 +48,19 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Cliente.CPF, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Cliente.CPF, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Cliente.CPF, new { @class = "form-control", placeholder = "000.000.000-00" })
             @Html.ValidationMessageFor(m => m.Cliente.CPF, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Cliente.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Cliente.Nome, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Cliente.Nome, new { @class = "form-control", placeholder = "Vitor Silva" })
             @Html.ValidationMessageFor(m => m.Cliente.Nome, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Cliente.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Cliente.Telefone, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.Cliente.Telefone, new { @class = "form-control", id = "Telefone", placeholder = "(00) 00000-0000" })
             @Html.ValidationMessageFor(m => m.Cliente.Telefone, "", new { @class = "text-danger" })
         </div>
 
@@ -72,7 +72,7 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Preco, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Preco, new { @class = "form-control", type = "decimal" })
+            @Html.TextBoxFor(m => m.Preco, new { @class = "form-control", placeholder = "100.000,00" })
             @Html.ValidationMessageFor(m => m.Preco, "", new { @class = "text-danger" })
         </div><br />
 
@@ -88,4 +88,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/Scripts/vendas.js")
+    @Scripts.Render("~/Scripts/formatarCampos.js")
 }

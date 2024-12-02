@@ -50,7 +50,6 @@ namespace AutoDealerManager.MVC.ViewModels
         public int Numero { get; set; }
 
         [Required(ErrorMessage = "O CEP é obrigatório.")]
-        [RegularExpression(@"^\d{8}$", ErrorMessage = "O CEP deve estar no formato 00000000.")]
         public string CEP { get; set; }
 
         public bool IsUpdate { get; set; }

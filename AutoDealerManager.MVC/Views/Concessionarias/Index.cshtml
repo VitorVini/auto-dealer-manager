@@ -1,12 +1,13 @@
 @model IEnumerable<AutoDealerManager.MVC.ViewModels.ConcessionariaVM>
 
 <div class="card">
-    <div class="card-header">
-        <h3>Concessionarias</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="mb-0">Concessionarias</h3>
         <a href="@Url.Action("Create")" class="btn btn-primary">Cadastrar Nova Concessionária</a>
     </div>
     <div class="card-body">
-        @if (@TempData["Sucesso"] != null) {
+        @if (@TempData["Sucesso"] != null)
+        {
             @Html.Partial("_Sucesso")
         }
         @Html.Partial("_Grid")

@@ -10,9 +10,11 @@ namespace AutoDealerManager.Domain.Entities.Services
     public class FabricanteService : BaseService, IFabricanteService
     {
         private readonly IFabricanteRepository _fabricanteRepository;
-        public FabricanteService(IFabricanteRepository fabricanteRepository)
+        private readonly IVeiculoRepository _veiculoRepository;
+        public FabricanteService(IFabricanteRepository fabricanteRepository, IVeiculoRepository veiculoRepository)
         {
             _fabricanteRepository = fabricanteRepository;
+            _veiculoRepository = veiculoRepository;
         }
 
         public async Task Adicionar(Fabricante fabricante)
@@ -41,25 +43,13 @@ namespace AutoDealerManager.Domain.Entities.Services
         public async Task Remover(Fabricante fabricante)
         {
             await _fabricanteRepository.RemoverAsync(fabricante);
+            var veiculos = await _veiculoRepository.ObterPorFabricanteAsync(fabricante.Id);
+
+            foreach (var veiculo in veiculos)
+            {
+                await _veiculoRepository.RemoverAsync(veiculo);
+            }
         }
-
-        //public async Task<bool> WebsiteAcessivelAsync(string website, CancellationToken cancellationToken)
-        //{
-        //    try
-        //    {
-        //        using (var client = new HttpClient())
-        //        {
-        //            client.Timeout = TimeSpan.FromSeconds(5);
-        //            var response = await client.GetAsync(website, cancellationToken);
-        //            return response.IsSuccessStatusCode;
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-        //}
-
         public bool WebsiteAcessivel(string website)
         {
             return WebsiteValidoUtils.IsUrlValid(website);

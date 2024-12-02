@@ -1,6 +1,6 @@
 @model IEnumerable<AutoDealerManager.MVC.ViewModels.ConcessionariaVM>
 
-<table class="table table-striped table-hover">
+<table class="table table-striped table-hover datatable">
     <thead>
         <tr>
             <th>@Html.DisplayNameFor(model => model.Nome)</th>
@@ -21,8 +21,8 @@
                 <td>@Html.DisplayFor(modelItem => concessionaria.Email)</td>
                 <td>@Html.DisplayFor(modelItem => concessionaria.CapacidadeMaximaVeiculos)</td>
                 <td style="width:160px">
-                    <a class="btn btn-warning" href="@Url.Action("Edit", "Concessionarias", new { id = concessionaria.Id })">Editar</a>
-                    <a class="btn btn-danger" href="@Url.Action("Delete", "Concessionarias", new { id = concessionaria.Id })">Excluir</a>
+                    <a class="btn btn-warning" href="@Url.Action("Edit", "Concessionarias", new { id = concessionaria.Id })"><i class="bi bi-pencil"></i></a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Concessionarias", new { id = concessionaria.Id })"><i class="bi bi-trash"></i></a>
                 </td>
             </tr>
         }

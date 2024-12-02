@@ -38,13 +38,13 @@ namespace AutoDealerManager.MVC.Controllers
         }
 
         [Route("nova-concessionaria")]
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         public ActionResult Create()
         {
             return View("Form", new ConcessionariaVM());
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("nova-concessionaria")]
@@ -75,7 +75,7 @@ namespace AutoDealerManager.MVC.Controllers
 
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         public async Task<ActionResult> Edit(Guid id)
         {
             var concessionariaVM = _mapper.Map<ConcessionariaVM>(await _concessionariaRepository.ObterPorIdAsync(id));
@@ -89,7 +89,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", concessionariaVM);
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Guid id, ConcessionariaVM concessionariaVM)
@@ -105,7 +105,7 @@ namespace AutoDealerManager.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {

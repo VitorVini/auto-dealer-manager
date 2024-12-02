@@ -21,13 +21,13 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", maxlength = 100 })
+            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", maxlength = 100, placeholder = "Premium Motors" })
             @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Telefone, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", placeholder = "(00) 0.0000-0000" })
+            @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control", id = "Telefone", placeholder = "(00) 00000-0000" })
             @Html.ValidationMessageFor(m => m.Telefone, "", new { @class = "text-danger" })
         </div>
 
@@ -55,8 +55,8 @@
 }
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-
+    @Scripts.Render("~/Scripts/formatarCampos.js")
     <script>
-     buscaCep();
+        buscaCep();
     </script>
 }

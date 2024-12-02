@@ -38,16 +38,6 @@ namespace AutoDealerManager.Domain.Entities.Services
             await _vendaRepository.AdicionarAsync(venda);
         }
 
-        public async Task Atualizar(Venda venda)
-        {
-            await ValidarDadosVendaAsync(venda);
-
-            var cliente = await _clienteRepository.ObterPorIdAsync(venda.ClienteId);
-            if (cliente == null) return;
-
-            await _vendaRepository.AtualizarAsync(venda);
-        }
-
         public async Task Remover(Venda venda)
         {
             await _vendaRepository.RemoverAsync(venda);
@@ -66,7 +56,6 @@ namespace AutoDealerManager.Domain.Entities.Services
 
             VerificarErros();
         }
-        // TO DO: ASSOCIAR VENDAS PARA NÃO QUEBRAR QUANDO O CLIENTE FOR O MESMO
         private async Task TratarCliente(Venda venda)
         {
             var cliente = await _clienteRepository.ObterPorCpfAsync(venda.Cliente.CPF);

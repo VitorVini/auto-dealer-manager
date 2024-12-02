@@ -29,7 +29,6 @@ namespace AutoDealerManager.MVC.ViewModels
 
         [Required(ErrorMessage = "O preço de venda é obrigatório.")]
         [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = false)]
-        [Range(1, 1000000000, ErrorMessage = "O preço deve ser um valor positivo e realista.")]
         [Display(Name = "Preço")]
         public decimal Preco { get; set; }
         public long Protocolo { get; set; }

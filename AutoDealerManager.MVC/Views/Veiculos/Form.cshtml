@@ -21,19 +21,19 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Modelo, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Modelo, new { @class = "form-control", maxlength = 100 })
+            @Html.TextBoxFor(m => m.Modelo, new { @class = "form-control", maxlength = 100, placeholder = "Fiesta" })
             @Html.ValidationMessageFor(m => m.Modelo, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.AnoFabricacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.AnoFabricacao, new { @class = "form-control", type = "number" })
+            @Html.TextBoxFor(m => m.AnoFabricacao, new { @class = "form-control", placeholder = "2020" })
             @Html.ValidationMessageFor(m => m.AnoFabricacao, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Preco, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Preco, new { @class = "form-control", type = "decimal" })
+            @Html.TextBoxFor(m => m.Preco, new { @class = "form-control", type = "decimal", placeholder = "65000" })
             @Html.ValidationMessageFor(m => m.Preco, "", new { @class = "text-danger" })
         </div>
 
@@ -51,7 +51,7 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control", type = "string" })
+            @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control", type = "string", placeholder = "Compacto e econômico." })
             @Html.ValidationMessageFor(m => m.Descricao, "", new { @class = "text-danger" })
         </div>
         <br />

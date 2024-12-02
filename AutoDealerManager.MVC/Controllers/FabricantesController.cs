@@ -38,7 +38,7 @@ namespace AutoDealerManager.MVC.Controllers
         }
 
         [Route("novo-fabricante")]
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         public ActionResult Create()
         {
             return View("Form", new FabricanteVM());
@@ -47,7 +47,7 @@ namespace AutoDealerManager.MVC.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("novo-fabricante")]
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         public async Task<ActionResult> Salvar(FabricanteVM fabricanteVM)
         {
             try
@@ -74,7 +74,7 @@ namespace AutoDealerManager.MVC.Controllers
             }
 
         }
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         public async Task<ActionResult> Edit(Guid id)
         {
             var fabricanteVM = _mapper.Map<FabricanteVM>(await _fabricanteRepository.ObterPorIdAsync(id));
@@ -90,7 +90,7 @@ namespace AutoDealerManager.MVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         public async Task<ActionResult> Edit(Guid id, FabricanteVM fabricanteVM)
         {
             if (!ModelState.IsValid) return View(fabricanteVM);
@@ -105,7 +105,7 @@ namespace AutoDealerManager.MVC.Controllers
         }
 
         [HttpGet, ActionName("Delete")]
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Administrador) + "," + nameof(EnumNivelAcesso.Dev))]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {
             var fabricante = await _fabricanteRepository.ObterPorIdAsync(id);

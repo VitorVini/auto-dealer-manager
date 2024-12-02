@@ -42,14 +42,14 @@ namespace AutoDealerManager.MVC.Controllers
             return View(vendas);
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor) + "," + nameof(EnumNivelAcesso.Dev))]
         public async Task<ActionResult> RealizarVenda()
         {
             await CarregarViewbagsAsync();
             return View("Form", new VendaVM());
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RealizarVenda(VendaVM vendaVM)
@@ -83,37 +83,7 @@ namespace AutoDealerManager.MVC.Controllers
 
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
-        public async Task<ActionResult> Edit(Guid id)
-        {
-            await CarregarViewbagsAsync();
-            var vendaVM = _mapper.Map<VendaVM>(await _vendaRepository.ObterPorIdAsync(id));
-
-            if (vendaVM == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View("Form", vendaVM);
-        }
-
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Guid id, VendaVM vendaVM)
-        {
-            if (!ModelState.IsValid) return View(vendaVM);
-
-            if (id != vendaVM.Id) return HttpNotFound();
-
-            var venda = _mapper.Map<Venda>(vendaVM);
-            await _vendaService.Atualizar(venda);
-
-            TempData["Sucesso"] = "Venda atualizado com sucesso!";
-            return RedirectToAction("Index", "Home");
-        }
-
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Vendedor) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {

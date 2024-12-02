@@ -20,25 +20,25 @@
 
         <div class="form-group">
             @Html.LabelFor(m => m.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", maxlength = 100 })
+            @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", maxlength = 100, placeholder = "Ford" })
             @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.PaisOrigem, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.PaisOrigem, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.PaisOrigem, new { @class = "form-control", placeholder = "Estados Unidos"})
             @Html.ValidationMessageFor(m => m.PaisOrigem, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.AnoFundacao, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.AnoFundacao, new { @class = "form-control", type = "number" })
+            @Html.TextBoxFor(m => m.AnoFundacao, new { @class = "form-control", placeholder = "1908" })
             @Html.ValidationMessageFor(m => m.AnoFundacao, "", new { @class = "text-danger" })
         </div>
 
         <div class="form-group">
             @Html.LabelFor(m => m.Website, htmlAttributes: new { @class = "control-label col-md-2" })
-            @Html.TextBoxFor(m => m.Website, new { @class = "form-control", type = "url" })
+            @Html.TextBoxFor(m => m.Website, new { @class = "form-control", type = "url", placeholder = "http://www.ford.com" })
             @Html.ValidationMessageFor(m => m.Website, "", new { @class = "text-danger" })
         </div>
         <br />

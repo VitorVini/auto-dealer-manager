@@ -4,6 +4,7 @@
     {
         Administrador,
         Vendedor,
-        Gerente
+        Gerente,
+        Dev
     }
 }

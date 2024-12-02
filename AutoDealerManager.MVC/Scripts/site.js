@@ -97,7 +97,7 @@ function obterModalConcessionarias() {
     });
 }
 
-function inicializarDataTable(tableId) {
+function inicializarDataTableModal(tableId) {
     $(document).ready(function () {
         $(tableId).DataTable({
             "autoWidth": false,
@@ -133,3 +133,39 @@ function inicializarDataTable(tableId) {
         });
     });
 }
+$(document).ready(function () {
+    $('.datatable').each(function () {
+        $(this).DataTable({
+            "autoWidth": false,
+            "language": {
+                "sEmptyTable": "Nenhum dado disponível na tabela",
+                "sInfo": "Mostrando _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(filtrado de _MAX_ registros no total)",
+                "sLengthMenu": "Exibir _MENU_ registros por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sSearch": "Buscar:",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "oPaginate": {
+                    "sFirst": "Primeira",
+                    "sPrevious": "Anterior",
+                    "sNext": "Próxima",
+                    "sLast": "Última"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ativar para ordenar a coluna de forma ascendente",
+                    "sSortDescending": ": Ativar para ordenar a coluna de forma descendente"
+                }
+            },
+            "columnDefs": [
+                {
+                    "targets": -1,
+                    "orderable": false,
+                    "searchable": false,
+                    "width": "80px"
+                }
+            ]
+        });
+    });
+});

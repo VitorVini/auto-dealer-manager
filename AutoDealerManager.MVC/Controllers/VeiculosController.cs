@@ -43,7 +43,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View(veiculos);
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         [Route("novo-veiculo")]
         public async Task<ActionResult> Create()
         {
@@ -51,7 +51,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", new VeiculoVM());
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("novo-veiculo")]
@@ -89,7 +89,7 @@ namespace AutoDealerManager.MVC.Controllers
 
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         public async Task<ActionResult> Edit(Guid id)
         {
             await CarregarViewbagsAsync();
@@ -104,7 +104,7 @@ namespace AutoDealerManager.MVC.Controllers
             return View("Form", veiculoVM);
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Edit(Guid id, VeiculoVM veiculoVM)
@@ -120,7 +120,7 @@ namespace AutoDealerManager.MVC.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente))]
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpGet, ActionName("Delete")]
         public async Task<ActionResult> DeleteConfirmed(Guid id)
         {

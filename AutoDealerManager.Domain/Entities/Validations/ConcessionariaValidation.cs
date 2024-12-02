@@ -36,7 +36,7 @@ namespace AutoDealerManager.Domain.Entities.Validations
 
             RuleFor(e => e.CEP)
                 .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido.")
-                .Length(8).WithMessage("O CEP deve ter exatamente 8 caracteres.");
+                .Length(9).WithMessage("O CEP deve ter exatamente 9 caracteres.");
         }
     }
 }

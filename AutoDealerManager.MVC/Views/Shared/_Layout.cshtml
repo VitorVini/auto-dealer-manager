@@ -23,10 +23,11 @@
                     <li>@Html.ActionLink("Veiculos", "Index", "Veiculos", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Concessionárias", "Index", "Concessionarias", new { area = "" }, new { @class = "nav-link" })</li>
                     <li>@Html.ActionLink("Vendas", "Index", "Vendas", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li>@Html.ActionLink("Relatorios", "RelatorioMensal", "Relatorios", new { area = "" }, new { @class = "nav-link" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
-            <div id="loading" class="spinner-border text-primary" role="status" style="display: none; width: 3rem; height: 3rem;" >
+            <div id="loading" class="spinner-border text-primary" role="status" style="display: none; width: 3rem; height: 3rem;">
                 <span class="visually-hidden">Carregando...</span>
             </div>
             <div id="divModal" class="modal" tabindex="-1">
@@ -59,6 +60,7 @@
     <script src="https://cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/plug-ins/1.13.4/i18n/Portuguese-Brasil.json"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
