@@ -29,7 +29,6 @@ namespace AutoDealerManager.Domain.Core.Services
             if (!condicao)
                 errors.Add(mensagemDeErro);
         }
-        // TO DO : CRIAR EXCEPTION CUSTOMIZADO PARA VALIDAÇAO
         protected void VerificarErros()
         {
             if (errors.Any())

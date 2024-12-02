@@ -1,9 +1,12 @@
 ﻿using AutoDealerManager.Application.Services;
+using AutoDealerManager.Domain.Enum;
+using AutoDealerManager.MVC.Attributes;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace AutoDealerManager.MVC.Controllers
 {
+    [Authorize]
     public class RelatoriosController : Controller
     {
         private readonly IRelatorioAppService _relatorioAppService;
@@ -13,11 +16,13 @@ namespace AutoDealerManager.MVC.Controllers
             _relatorioAppService = relatorioAppService;
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         public ActionResult RelatorioMensal()
         {
             return View();
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpGet]
         public async Task<JsonResult> ObterRelatorioMensal(int mes, int ano)
         {
@@ -39,6 +44,7 @@ namespace AutoDealerManager.MVC.Controllers
             }, JsonRequestBehavior.AllowGet);
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpGet]
         public async Task<ActionResult> ExportarParaPDF(int mes, int ano)
         {
@@ -47,6 +53,7 @@ namespace AutoDealerManager.MVC.Controllers
             return File(pdfBytes, "application/pdf", $"Relatorio_Mensal_{mes}_{ano}.pdf");
         }
 
+        [CustomAuthorize(Roles = nameof(EnumNivelAcesso.Gerente) + "," + nameof(EnumNivelAcesso.Dev))]
         [HttpGet]
         public async Task<ActionResult> ExportarParaExcel(int mes, int ano)
         {
